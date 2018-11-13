@@ -14,10 +14,10 @@ data class UserEntity(
         override var id: Int,
 
         @ColumnInfo(name = "created_at")
-        override var created_at: String,
+        override var created_at: CreatedAt,
 
         @ColumnInfo(name = "updated_at")
-        override var updated_at: String,
+        override var updated_at: UpdateAt,
 
         @ColumnInfo(name = "username")
         @SerializedName(Field.USERNAME)

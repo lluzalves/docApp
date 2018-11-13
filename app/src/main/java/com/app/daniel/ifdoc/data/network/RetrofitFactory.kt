@@ -1,7 +1,6 @@
 package com.app.daniel.ifdoc.data.network
 
 import com.app.daniel.ifdoc.commons.Constants
-import com.app.daniel.ifdoc.data.services.DocumentService
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,24 +11,34 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitFactory {
 
-    private var interceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    private lateinit var interceptor: HttpLoggingInterceptor
 
-    private var client = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .build()
+    private lateinit var client: OkHttpClient
 
-    private var retrofit = Retrofit.Builder()
-            .client(client)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Constants.Api.API_URL)
-            .build()
+    private lateinit var retrofit: Retrofit
 
-    fun create(): DocumentService {
-        return retrofit.create(DocumentService::class.java)
+
+    fun prepare(token: String): Retrofit {
+
+        client = OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    val current = chain.request()
+                    val newRequest = current.newBuilder().addHeader("Authorization", token)
+                    val request = newRequest.build()
+                    chain.proceed(request)
+                }
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+
+        retrofit = Retrofit.Builder()
+                .client(client)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(Constants.Api.API_URL)
+                .build()
+
+        return retrofit
+
     }
-
 }
