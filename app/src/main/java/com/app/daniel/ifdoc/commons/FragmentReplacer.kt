@@ -6,11 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 
-
-
-
 class FragmentReplacer {
-
 
     fun addFragment(fragment: Fragment, fragmentManager: FragmentManager, bundle: Bundle, containerViewId: Int) {
         fragment.arguments = bundle

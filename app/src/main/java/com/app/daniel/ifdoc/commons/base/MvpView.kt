@@ -1,6 +1,5 @@
 package com.app.daniel.ifdoc.commons.base
 
-
 interface MvpView {
 
     fun connectionStatus(status : Boolean)

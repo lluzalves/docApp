@@ -41,26 +41,4 @@ class RetrofitFactory {
         return retrofit
 
     }
-
-
-    fun basicClient(baseUrl : String): Retrofit {
-        var interceptor = HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY)
-
-        client = OkHttpClient.Builder()
-                .addInterceptor (interceptor)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build()
-
-        retrofit = Retrofit.Builder()
-                .client(client)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(baseUrl)
-                .build()
-
-        return retrofit
-
-    }
 }

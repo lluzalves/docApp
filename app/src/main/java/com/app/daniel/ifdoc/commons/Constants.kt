@@ -7,7 +7,7 @@ class Constants {
     }
 
     object Endpoint {
-        const val LOGIN = "fragment_login"
+        const val LOGIN = "login"
         const val REGISTER = "register"
         const val DOCUMENTS = "documents"
         const val USER = "user"
