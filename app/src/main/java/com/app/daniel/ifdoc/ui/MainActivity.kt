@@ -2,10 +2,12 @@ package com.app.daniel.ifdoc.ui
 
 import android.os.Bundle
 import com.app.daniel.ifdoc.R
+import com.app.daniel.ifdoc.commons.FragmentReplacer
 import com.app.daniel.ifdoc.commons.base.BaseActivity
 import com.app.daniel.ifdoc.data.entities.ResponseEntity
 import com.app.daniel.ifdoc.data.network.RetrofitFactory
 import com.app.daniel.ifdoc.data.services.DocumentService
+import com.app.daniel.ifdoc.ui.auth.LoginFragment
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -15,7 +17,11 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_login)
+        setContentView(R.layout.activity_main)
+        if (savedInstanceState == null) {
+            var fragment = LoginFragment()
+            FragmentReplacer().loadInitialActivityFragment(fragment, this, R.id.container)
+        }
     }
 
     fun pullData() {

@@ -15,4 +15,9 @@
     <string name="forgot_password">FORGOT PASSWORD ?</string>
     <string name="no_account">DON\'T HAVE A ACCOUNT</string>
     <string name="terms_of_use">TERMS OF USE</string>
+    <string name="start_login">Let\'s go</string>
+    <string name="doc_icon">doc icon image</string>
+    <string name="no_connection">You are not connected with a network or your current network does not have internet access</string>
+    <string name="checking_connection">Please wait, checking your internet connection.</string>
+    <string name="message_wait">Please wait</string>
 </resources>
