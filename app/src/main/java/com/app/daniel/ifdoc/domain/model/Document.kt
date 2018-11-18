@@ -5,8 +5,8 @@ import com.app.daniel.ifdoc.data.entities.UpdateAt
 
 data class Document(
         override var id: Int,
-        override var created_at: CreatedAt,
-        override var updated_at: UpdateAt,
+        override var created_at: String,
+        override var updated_at: String,
         val description: String,
         val fileUrl: String,
         val userId: Int,

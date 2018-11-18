@@ -5,6 +5,6 @@ import com.app.daniel.ifdoc.data.entities.UpdateAt
 
 interface BaseModel {
     var id: Int
-    var created_at: CreatedAt
-    var updated_at: UpdateAt
+    var created_at: String
+    var updated_at: String
 }

@@ -19,9 +19,11 @@ class AuthPresenter : BasePresenter<MvpAuthView>() {
     }
 
     fun login(email: String, password: String) {
+        mMvpView?.showRequestDialog("Please wait")
+
         var client = OkHttpFactory()
                 .prepareBasicAuthClient(email, password)
-        mMvpView?.showRequestDialog("Please wait")
+
         RetrofitFactory().setRetrofit(client)
                 .create(UserService::class.java)
                 .login()

@@ -14,10 +14,12 @@ data class DocumentEntity(
         override var id: Int,
 
         @ColumnInfo(name = "created_at")
-        override var created_at: CreatedAt,
+        @SerializedName(Field.CREATED_AT)
+        override var created_at: String,
 
         @ColumnInfo(name = "updated_at")
-        override var updated_at: UpdateAt,
+        @SerializedName(Field.UPDATED_AT)
+        override var updated_at: String,
 
         @ColumnInfo(name = "user_id")
         @SerializedName(Field.USER_ID)

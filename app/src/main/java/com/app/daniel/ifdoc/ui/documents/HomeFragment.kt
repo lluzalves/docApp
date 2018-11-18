@@ -20,16 +20,23 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
         return inflater.inflate(R.layout.dashboard, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.checkUserDocuments(getToken())
+    }
+
     override fun connectionStatus(status: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showRequestDialog(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        dialog = ProgressDialog.show(context, getString(R.string.message_wait), message)
     }
 
     override fun dismissRequestDialog() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (dialog != null && dialog.isShowing) {
+            dialog.dismiss()
+        }
     }
 
     override fun showResponse(message: String) {

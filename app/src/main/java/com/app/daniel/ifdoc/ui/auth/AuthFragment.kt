@@ -37,7 +37,7 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         if (isTokenStored()) {
             showHome()
-        }else{
+        } else {
             context?.let { checkNetwork(it) }
         }
         checkConnection.setOnClickListener(this)
@@ -75,10 +75,6 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         if (dialog != null && dialog.isShowing) {
             dialog.dismiss()
         }
-    }
-
-    override fun onError(message: String) {
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
     }
 
     override fun showResponse(message: String) {

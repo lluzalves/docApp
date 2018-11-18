@@ -64,10 +64,6 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
         }
     }
 
-    override fun onError(message: String) {
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
-    }
-
     override fun showResponse(message: String) {
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
         fragmentManager?.popBackStack()

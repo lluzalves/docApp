@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import com.app.daniel.ifdoc.commons.security.Base64Helper
+import com.google.android.material.snackbar.Snackbar
 
 
 abstract class BaseFragment : Fragment(), MvpView {
@@ -20,7 +21,7 @@ abstract class BaseFragment : Fragment(), MvpView {
     }
 
     override fun onError(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
     }
 
     override fun previousScreen() {

@@ -14,7 +14,7 @@ class OkHttpFactory {
         return OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     val current = chain.request()
-                    val newRequest = current.newBuilder().addHeader("Authorization", token)
+                    val newRequest = current.newBuilder().addHeader("Authorization", "Bearer ".plus(token))
                     val request = newRequest.build()
                     chain.proceed(request)
                 }
