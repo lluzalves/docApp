@@ -1,24 +1,23 @@
 package com.app.daniel.ifdoc.commons.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
-import com.app.daniel.ifdoc.commons.animation.CircularReveal
+import com.app.daniel.ifdoc.commons.security.Base64Helper
 
 
-abstract class BaseFragment : Fragment(), IOnBackPressed, MvpView {
+abstract class BaseFragment : Fragment(), MvpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
     }
 
-     override fun onBackPressed(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    protected fun getToken(): String {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val encryptedToken = preferences.getString(Base64Helper().encrypt("token"), Base64Helper().encrypt("default"))
+        return Base64Helper().decrypt(encryptedToken)
     }
-
 
     override fun onError(message: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

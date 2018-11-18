@@ -4,7 +4,9 @@ package com.app.daniel.ifdoc.ui.auth
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +16,9 @@ import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.FragmentReplacer
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
+import com.app.daniel.ifdoc.commons.security.Base64Helper
 import com.app.daniel.ifdoc.ui.auth.register.RegisterFragment
+import com.app.daniel.ifdoc.ui.documents.HomeFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -31,12 +35,18 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        context?.let {
-            checkNetwork(it)
+        if (isTokenStored()) {
+            showHome()
+        }else{
+            context?.let { checkNetwork(it) }
         }
         checkConnection.setOnClickListener(this)
         noAccount.setOnClickListener(this)
         startLogin.setOnClickListener(this)
+    }
+
+    private fun isTokenStored(): Boolean {
+        return getToken() != "default"
     }
 
     override fun showLogin(isInternetAvailable: Boolean) {
@@ -75,6 +85,12 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
     }
 
+    override fun storeToken(token: String) {
+        var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        var editor: SharedPreferences.Editor = preferences.edit()
+        editor.putString(Base64Helper().encrypt("token"), Base64Helper().encrypt(token))
+        editor.apply()
+    }
 
     override fun onClick(view: View) {
         when (view) {
@@ -88,7 +104,6 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         }
     }
 
-
     override fun showSignUp() {
         var fragment = RegisterFragment()
         val bundle = Bundle()
@@ -97,8 +112,12 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         fragmentManager?.let { manager -> FragmentReplacer().addFragment(fragment, manager, bundle, R.id.container) }
     }
 
-    override fun showDashboard() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showHome() {
+        var fragment = HomeFragment()
+        val bundle = Bundle()
+        bundle.putInt("view_to_circular_animation_x", noAccount.x.toInt())
+        bundle.putInt("view_to_circular_animation_y", noAccount.y.toInt())
+        fragmentManager?.let { manager -> FragmentReplacer().replaceFragment(fragment, manager, bundle, R.id.container) }
     }
 
     override fun showRecoverPassword() {

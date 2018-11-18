@@ -30,7 +30,8 @@ class AuthPresenter : BasePresenter<MvpAuthView>() {
                 .subscribe(object : SingleObserver<ResponseEntity> {
                     override fun onSuccess(response: ResponseEntity) {
                         mMvpView?.dismissRequestDialog()
-                        mMvpView?.showDashboard()
+                        mvpView?.storeToken(response.token)
+                        mMvpView?.showHome()
                     }
 
                     override fun onSubscribe(d: Disposable) {
