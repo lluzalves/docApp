@@ -7,8 +7,9 @@ data class User(
         override var id: Int,
         override var created_at: CreatedAt,
         override var updated_at: UpdateAt,
-        val username: String,
-        val token: String,
-        val token_expiration_date: String,
-        val email: String
+        var name: String,
+        var password: String,
+        var token: String,
+        var token_expiration_date: String,
+        var email: String
 ) : BaseModel

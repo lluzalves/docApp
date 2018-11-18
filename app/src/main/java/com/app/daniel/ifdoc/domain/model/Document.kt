@@ -9,5 +9,6 @@ data class Document(
         override var updated_at: UpdateAt,
         val description: String,
         val fileUrl: String,
-        val userId: Int
+        val userId: Int,
+        val notification: String
 ) : BaseModel

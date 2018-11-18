@@ -32,13 +32,11 @@ open class BasePresenter<T : MvpView> : Presenter<T> {
     }
 
     override fun checkInternetConnection(context : Context) {
-        mMvpView?.showRequestDialog("Checking internet status")
         GlobalScope.launch {
             var networkListener = object : NetworkListener {
                 override fun isOnline(result: Boolean) {
                     if (result) {
                         mMvpView?.connectionStatus(result)
-                        mMvpView?.dismissRequestDialog()
                     }
                 }
             }

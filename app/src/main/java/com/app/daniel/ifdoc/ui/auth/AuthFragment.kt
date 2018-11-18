@@ -1,23 +1,27 @@
 package com.app.daniel.ifdoc.ui.auth
 
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import com.app.daniel.ifdoc.R
+import com.app.daniel.ifdoc.commons.FragmentReplacer
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
+import com.app.daniel.ifdoc.ui.auth.register.RegisterFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
+class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
 
     private lateinit var dialog: ProgressDialog
-    private var presenter = LoginPresenter()
+    private var presenter = AuthPresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,6 +35,8 @@ class LoginFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
             checkNetwork(it)
         }
         checkConnection.setOnClickListener(this)
+        noAccount.setOnClickListener(this)
+        startLogin.setOnClickListener(this)
     }
 
     override fun showLogin(isInternetAvailable: Boolean) {
@@ -61,14 +67,37 @@ class LoginFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         }
     }
 
+    override fun onError(message: String) {
+        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
+    }
+
+    override fun showResponse(message: String) {
+        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
+    }
+
+
     override fun onClick(view: View) {
         when (view) {
             checkConnection -> checkNetwork(view.context)
+            noAccount -> showSignUp()
+            startLogin -> {
+                val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+                presenter.login(email.text.toString(), password.text.toString())
+            }
         }
     }
 
 
     override fun showSignUp() {
+        var fragment = RegisterFragment()
+        val bundle = Bundle()
+        bundle.putInt("view_to_circular_animation_x", noAccount.x.toInt())
+        bundle.putInt("view_to_circular_animation_y", noAccount.y.toInt())
+        fragmentManager?.let { manager -> FragmentReplacer().addFragment(fragment, manager, bundle, R.id.container) }
+    }
+
+    override fun showDashboard() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

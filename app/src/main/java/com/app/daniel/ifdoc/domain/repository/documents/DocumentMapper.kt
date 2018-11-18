@@ -9,5 +9,6 @@ import com.app.daniel.ifdoc.domain.model.Document
             created_at = this.created_at,
             updated_at = this.updated_at,
             description = this.description,
-            fileUrl = this.fileUrl
+            fileUrl = this.fileUrl,
+            notification = this.notification
     )

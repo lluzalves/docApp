@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="ui.auth.LoginFragment">
+    tools:context="ui.auth.AuthFragment">
 
     <LinearLayout
         android:id="@+id/login"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
-            app:cardBackgroundColor="@android:color/holo_blue_dark"
+            app:cardBackgroundColor="@color/color_blue"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp">
 
@@ -55,17 +55,16 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
-                        android:text="@string/email"
+                        android:text="@string/label_email"
                         android:textColor="@android:color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editText_email"
+                        android:id="@+id/email"
                         android:layout_width="280dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/white"
@@ -86,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@android:color/holo_blue_dark"
+            app:cardBackgroundColor="@color/color_blue"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp">
 
@@ -109,7 +108,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
@@ -120,7 +118,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editText_password"
+                        android:id="@+id/password"
                         android:layout_width="280dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/white"
@@ -142,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@android:color/holo_blue_dark"
+            app:cardBackgroundColor="@color/color_blue"
             app:cardCornerRadius="15dp"
             app:cardElevation="10dp">
 
@@ -176,7 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@android:color/holo_blue_dark"
+            app:cardBackgroundColor="@color/color_blue"
             app:cardCornerRadius="15dp"
             app:cardElevation="10dp">
 

@@ -14,23 +14,26 @@ data class DocumentEntity(
         override var id: Int,
 
         @ColumnInfo(name = "created_at")
-        override var created_at: CreatedAt ,
+        override var created_at: CreatedAt,
 
         @ColumnInfo(name = "updated_at")
         override var updated_at: UpdateAt,
 
         @ColumnInfo(name = "user_id")
         @SerializedName(Field.USER_ID)
-
         val userId: Int,
-        @ColumnInfo(name = "description")
 
+        @ColumnInfo(name = "description")
         @SerializedName(Field.DESCRIPTION)
         val description: String,
 
         @ColumnInfo(name = "file_url")
         @SerializedName(Field.FILE_URL)
-        val fileUrl: String
+        val fileUrl: String,
+
+        @ColumnInfo(name = "notification")
+        @SerializedName(Field.NOTIFICATION)
+        val notification: String
 ) : BaseEntity, JsonConvertable {
 
     lateinit var json: String
@@ -51,6 +54,7 @@ data class DocumentEntity(
             const val FILE_URL = "file_url"
             const val CREATED_AT = "created_at"
             const val UPDATED_AT = "updated_at"
+            const val NOTIFICATION = "notification"
         }
     }
 }

@@ -1,0 +1,47 @@
+package com.app.daniel.ifdoc.ui.auth
+
+
+import com.app.daniel.ifdoc.commons.base.BasePresenter
+import com.app.daniel.ifdoc.commons.network.OkHttpFactory
+import com.app.daniel.ifdoc.commons.network.RetrofitFactory
+import com.app.daniel.ifdoc.data.entities.ResponseEntity
+import com.app.daniel.ifdoc.data.services.user.UserService
+import io.reactivex.SingleObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+
+
+class AuthPresenter : BasePresenter<MvpAuthView>() {
+
+    override fun attachView(mvpView: MvpAuthView) {
+        mMvpView = mvpView
+    }
+
+    fun login(email: String, password: String) {
+        var client = OkHttpFactory()
+                .prepareBasicAuthClient(email, password)
+        mMvpView?.showRequestDialog("Please wait")
+        RetrofitFactory().setRetrofit(client)
+                .create(UserService::class.java)
+                .login()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SingleObserver<ResponseEntity> {
+                    override fun onSuccess(response: ResponseEntity) {
+                        mMvpView?.dismissRequestDialog()
+                        mMvpView?.showDashboard()
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        mMvpView?.dismissRequestDialog()
+                        mMvpView?.showResponse("Error : ".plus(e.localizedMessage))
+                    }
+
+                })
+    }
+}

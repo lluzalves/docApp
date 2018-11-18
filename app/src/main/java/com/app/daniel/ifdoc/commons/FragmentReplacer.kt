@@ -2,14 +2,14 @@ package com.app.daniel.ifdoc.commons
 
 import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.appcompat.app.AppCompatActivity
 
 class FragmentReplacer {
 
-    fun addFragment(fragment: Fragment, fragmentManager: FragmentManager, bundle: Bundle, containerViewId: Int) {
-        fragment.arguments = bundle
+    fun addFragment(fragment: Fragment, fragmentManager: FragmentManager, bundle: Bundle?, containerViewId: Int) {
+        bundle?.let { fragment.arguments = bundle }
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(containerViewId, fragment)
         fragmentTransaction.addToBackStack(null)

@@ -10,7 +10,7 @@
     <string name="prompt_password">password</string>
     <string name="login">Sign in</string>
     <string name="register">Sign up</string>
-    <string name="email">email</string>
+    <string name="label_email">Email</string>
     <string name="password">password</string>
     <string name="forgot_password">FORGOT PASSWORD ?</string>
     <string name="no_account">DON\'T HAVE A ACCOUNT</string>
@@ -20,4 +20,8 @@
     <string name="no_connection">You are not connected with a network or your current network does not have internet access</string>
     <string name="checking_connection">Please wait, checking your internet connection.</string>
     <string name="message_wait">Please wait</string>
+    <string name="register_failure">Failed to register user, please try again</string>
+    <string name="label_name">Name</string>
+    <string name="label_password">Password</string>
+    <string name="error_email">Invalid email, please try again. Must be @ifsp.edu.br email</string>
 </resources>

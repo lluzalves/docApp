@@ -10,6 +10,8 @@ interface MvpView {
 
     fun onError(message: String)
 
+    fun showResponse(message: String)
+
     fun previousScreen()
 
     fun nextScreen(flowIntention: Int)

@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_blue"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.app.daniel.ifdoc.ui.auth.register.RegisterFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_left_margin_default"
+        android:layout_marginTop="@dimen/activity_default_margin_top"
+        android:layout_gravity="start"
+        android:text="@string/label_name"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/activity_text_label_size"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+             android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_left_margin_default"
+        android:layout_marginTop="@dimen/activity_default_margin_top"
+        android:layout_gravity="start"
+        android:text="@string/label_email"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/activity_text_label_size"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/userEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_left_margin_default"
+        android:layout_marginTop="@dimen/activity_default_margin_top"
+        android:text="@string/label_password"
+        android:layout_gravity="start"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/activity_text_label_size"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/userPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/createUser"
+        android:layout_width="@dimen/imagewiew_icon_default_width"
+        android:layout_height="@dimen/imagewiew_icon_default_height"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_done_24dp" />
+</LinearLayout>

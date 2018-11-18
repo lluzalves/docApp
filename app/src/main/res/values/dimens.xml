@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="imageView_icon_login_screen_width">80dp</dimen>
+    <dimen name="imageView_icon_login_screen_height">80dp</dimen>
+    <dimen name="activity_text_title_size">30dp</dimen>
+    <dimen name="activity_text_label_size">20dp</dimen>
+    <dimen name="cardview_elevation">25dp</dimen>
+    <dimen name="cardview_corner_radius_default">10dp</dimen>
+    <dimen name="activity_left_margin_default">10dp</dimen>
+    <dimen name="activity_right_margin_default">10dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
+    <dimen name="activity_horizontal_margin">10dp</dimen>
+    <dimen name="imagewiew_icon_default_width">40dp</dimen>
+    <dimen name="imagewiew_icon_default_height">40dp</dimen>
+    <dimen name="activity_default_margin_top">5dp</dimen>
+    <dimen name="textView_form_size">15dp</dimen>
+    <dimen name="activity_default_margin_bottom">5dp</dimen>
+    <dimen name="activity_default_margin_left">10dp</dimen>
+</resources>

@@ -19,9 +19,9 @@ data class UserEntity(
         @ColumnInfo(name = "updated_at")
         override var updated_at: UpdateAt,
 
-        @ColumnInfo(name = "username")
-        @SerializedName(Field.USERNAME)
-        val username: String,
+        @ColumnInfo(name = "name")
+        @SerializedName(Field.NAME)
+        val name: String,
 
         @ColumnInfo(name = "user_email")
         @SerializedName(Field.EMAIL)
@@ -49,7 +49,7 @@ data class UserEntity(
 
         object Field {
             const val ID = "id"
-            const val USERNAME = "username"
+            const val NAME = "name"
             const val EMAIL = "email"
             const val TOKEN = "token"
             const val TOKEN_EXPIRATION = "token_expiration"
