@@ -6,7 +6,7 @@
     android:background="@color/color_blue"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.app.daniel.ifdoc.ui.auth.register.RegisterFragment">
+    tools:context=".ui.user.register.AddDocumentFragment">
 
     <TextView
         android:layout_width="wrap_content"

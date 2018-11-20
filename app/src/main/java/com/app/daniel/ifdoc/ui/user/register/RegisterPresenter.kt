@@ -1,10 +1,10 @@
-package com.app.daniel.ifdoc.ui.auth.register
+package com.app.daniel.ifdoc.ui.user.register
 
 
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
 import com.app.daniel.ifdoc.commons.network.RetrofitFactory
-import com.app.daniel.ifdoc.data.entities.UserResponseEntity
+import com.app.daniel.ifdoc.data.entities.responses.UserResponseEntity
 import com.app.daniel.ifdoc.data.services.user.UserService
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers

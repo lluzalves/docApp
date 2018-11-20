@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.commons
+package com.app.daniel.ifdoc.commons.input
 
 import java.util.regex.Matcher
 import java.util.regex.Pattern

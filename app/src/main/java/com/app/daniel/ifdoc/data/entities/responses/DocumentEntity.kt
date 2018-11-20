@@ -1,9 +1,12 @@
-package com.app.daniel.ifdoc.data.entities
+package com.app.daniel.ifdoc.data.entities.responses
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.app.daniel.ifdoc.data.entities.BaseEntity
+import com.app.daniel.ifdoc.data.entities.JsonConvertable
+import com.app.daniel.ifdoc.data.entities.toObject
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = DocumentEntity.NAME)

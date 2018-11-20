@@ -2,7 +2,7 @@ package com.app.daniel.ifdoc.domain.repository.documents
 
 import android.app.Application
 import com.app.daniel.ifdoc.data.dao.DocsRoomDatabase
-import com.app.daniel.ifdoc.data.entities.DocumentEntity
+import com.app.daniel.ifdoc.data.entities.responses.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers

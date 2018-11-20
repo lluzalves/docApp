@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.ui.auth.register
+package com.app.daniel.ifdoc.ui.user.register
 
 import android.app.Activity
 import android.app.ProgressDialog
@@ -23,7 +23,6 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        presenter.attachView(this)
         presenter.attachView(this)
         return inflater.inflate(R.layout.fragment_create_user, container, false)
     }

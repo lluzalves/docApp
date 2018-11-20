@@ -1,6 +1,6 @@
 package com.app.daniel.ifdoc.commons.network
 
-import com.app.daniel.ifdoc.commons.Constants
+import com.app.daniel.ifdoc.commons.api.Constants
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

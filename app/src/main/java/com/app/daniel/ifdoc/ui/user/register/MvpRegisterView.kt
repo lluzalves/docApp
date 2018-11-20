@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.ui.auth.register
+package com.app.daniel.ifdoc.ui.user.register
 
 import com.app.daniel.ifdoc.commons.base.MvpView
 

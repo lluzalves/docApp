@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.commons
+package com.app.daniel.ifdoc.commons.api
 
 class Constants {
 

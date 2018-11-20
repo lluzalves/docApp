@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.ui.auth
+package com.app.daniel.ifdoc.ui.user.auth
 
 
 import android.app.Activity
@@ -13,11 +13,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import com.app.daniel.ifdoc.R
-import com.app.daniel.ifdoc.commons.FragmentReplacer
+import com.app.daniel.ifdoc.commons.view.FragmentReplacer
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
 import com.app.daniel.ifdoc.commons.security.Base64Helper
-import com.app.daniel.ifdoc.ui.auth.register.RegisterFragment
+import com.app.daniel.ifdoc.ui.user.register.RegisterFragment
 import com.app.daniel.ifdoc.ui.documents.HomeFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*

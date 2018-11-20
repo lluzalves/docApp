@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="document_type">
+        <item>Cpf</item>
+        <item>RG</item>
+        <item>Comprovante de Moradia</item>
+        <item>Comprovante de Aluguel</item>
+        <item>Comprovante de Matricula</item>
+        <item>Atestado Médico</item>
+        <item>Carteira de Trabalho</item>
+        <item>Historico Escolar</item>
+        <item>Outros</item>
+    </string-array>
+
+</resources>

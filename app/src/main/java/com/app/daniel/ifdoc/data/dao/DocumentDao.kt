@@ -1,7 +1,7 @@
 package com.app.daniel.ifdoc.data.dao
 
 import androidx.room.*
-import com.app.daniel.ifdoc.data.entities.DocumentEntity
+import com.app.daniel.ifdoc.data.entities.responses.DocumentEntity
 
 @Dao
 interface DocumentDao {

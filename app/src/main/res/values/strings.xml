@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="select_files">Click to add a new document</string>
+    <string name="select_files">Add a new document</string>
     <string name="login_page">Login</string>
     <string name="if_doc_app">ifDoc App</string>
     <string name="username">username</string>
@@ -24,4 +24,7 @@
     <string name="label_name">Name</string>
     <string name="label_password">Password</string>
     <string name="error_email">Invalid email, please try again. Must be @ifsp.edu.br email</string>
+    <string name="label_description">Description</string>
+    <string name="label_document_type">Type</string>
+    <string name="required_permissions">Permissions are required for the application to work properly</string>
 </resources>

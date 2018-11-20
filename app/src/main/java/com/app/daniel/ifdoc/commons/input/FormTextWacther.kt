@@ -6,7 +6,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.app.daniel.ifdoc.R
-import com.app.daniel.ifdoc.commons.EmailValidator
 
 
 class FormTextWacther : TextWatcher {
