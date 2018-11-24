@@ -27,4 +27,7 @@
     <string name="label_description">Description</string>
     <string name="label_document_type">Type</string>
     <string name="required_permissions">Permissions are required for the application to work properly</string>
+    <string name="choose_option_attachment">Please, choose the source</string>
+    <string name="add_a_new_document">add_new_document_label</string>
+    <string name="fail_to_attach_image">Failure to attach image</string>
 </resources>

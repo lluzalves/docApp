@@ -13,15 +13,16 @@ class InternetChecker(private val status: NetworkListener) : AsyncTask<Void, Voi
     override fun onPreExecute() {
         urlConnection.setRequestProperty("User-Agent", "Test")
         urlConnection.setRequestProperty("Connection", "close")
-        urlConnection.connectTimeout = 10000
+        urlConnection.connectTimeout = 5000
     }
 
     override fun doInBackground(vararg voids: Void): Boolean? {
         try {
             urlConnection.connect()
 
-            if (urlConnection.responseCode == 200) {
-                return true
+            return when (urlConnection.responseCode) {
+                200 -> true
+                else -> false
             }
 
         } catch (malFormedException: MalformedURLException) {
@@ -32,8 +33,6 @@ class InternetChecker(private val status: NetworkListener) : AsyncTask<Void, Voi
             ioException.printStackTrace()
             return false
         }
-
-        return false
     }
 
     override fun onPostExecute(result: Boolean) {

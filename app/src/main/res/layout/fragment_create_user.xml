@@ -6,7 +6,7 @@
     android:background="@color/color_blue"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.user.register.AddDocumentFragment">
+    tools:context=".ui.documents.add.AddDocumentFragment">
 
     <TextView
         android:layout_width="wrap_content"

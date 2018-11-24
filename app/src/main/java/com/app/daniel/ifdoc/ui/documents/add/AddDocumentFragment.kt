@@ -1,37 +1,48 @@
 package  com.app.daniel.ifdoc.ui.documents.add
 
 import android.app.Activity
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.Spinner
 import androidx.core.content.FileProvider
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.input.image.ImageDecoder
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
+import com.app.daniel.ifdoc.data.entities.DocumentResponseEntity
 import com.app.daniel.ifdoc.ui.user.register.AddDocumentPresenter
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_create_document.*
+import timber.log.Timber
 import java.io.File
+import java.io.FileNotFoundException
 
 
-class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickListener {
-
+class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
     private lateinit var dialog: ProgressDialog
+    private lateinit var attach: ImageView
+    private lateinit var camera: ImageView
+    private lateinit var attachmentDialog: Dialog
+    private lateinit var type: String
     private var presenter = AddDocumentPresenter()
-    private val CAMERA_REQUEST = 1888
+    private val cameraRequest = 1888
+    private val attachmentRequest = 1887
     private lateinit var folder: File
     private lateinit var pictureFile: File
+    private lateinit var savedPicture: Uri
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -51,12 +62,12 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         val adapter = ArrayAdapter.createFromResource(context, R.array.document_type, R.layout.spinner_layout)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
-        //   spinner.setOnItemSelectedListener(this)
+        spinner.onItemSelectedListener = this
     }
 
     override fun connectionStatus(isRegistered: Boolean) {
         if (isRegistered) {
-            //   presenter.createDocument(getToken())
+            activity?.contentResolver?.getType(savedPicture)?.let { presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type) }
         } else {
             view?.let { Snackbar.make(it, getString(R.string.register_failure), Snackbar.LENGTH_LONG).show() }
         }
@@ -87,9 +98,26 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            insertPhoto(attachment, pictureFile.absolutePath)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                cameraRequest -> insertPhoto(attachment, pictureFile.absolutePath)
+                attachmentRequest -> data?.let { insertAttachment(it) }
+            }
         }
+    }
+
+    private fun insertAttachment(data: Intent) {
+        try {
+            savedPicture = data.data
+            pictureFile = File(getPath(savedPicture))
+            val imageStream = activity?.contentResolver?.openInputStream(savedPicture)
+            val selectedImage = BitmapFactory.decodeStream(imageStream)
+            attachment.setImageBitmap(selectedImage)
+        } catch (e: FileNotFoundException) {
+            Timber.tag("ifdoc").e("Failed to attach file into imageview ".plus(e.localizedMessage))
+            view?.let { Snackbar.make(it, getString(R.string.fail_to_attach_image), Snackbar.LENGTH_LONG).show() }
+        }
+
     }
 
     private fun insertPhoto(imageView: ImageView, absolutePath: String) {
@@ -106,16 +134,69 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
                 checkNetwork(view.context)
             }
             takePicture -> {
+                showAttachmentDialog()
+            }
+            attach -> {
+                attachmentDialog.dismiss()
+                val photoPickerIntent = Intent(Intent.ACTION_PICK)
+                photoPickerIntent.type = "image/*"
+                startActivityForResult(photoPickerIntent, attachmentRequest)
+            }
+            camera -> {
+                attachmentDialog.dismiss()
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 pictureFile = File(folder, System.currentTimeMillis().toString() + ".png")
-                val savedPicture = activity?.let { FileProvider.getUriForFile(it, it.applicationContext.packageName + ".provider", pictureFile) }
+                savedPicture = activity?.let { FileProvider.getUriForFile(it, it.applicationContext.packageName + ".provider", pictureFile) }!!
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, savedPicture)
-                startActivityForResult(cameraIntent, CAMERA_REQUEST)
+                startActivityForResult(cameraIntent, cameraRequest)
             }
         }
     }
 
-    override fun showAttachment() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
     }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when (parent?.id) {
+            spinner.id -> {
+                type = parent.selectedItem.toString()
+            }
+        }
+    }
+
+    private fun showAttachmentDialog() {
+        attachmentDialog = Dialog(context)
+        attachmentDialog.setContentView(R.layout.dialog_attachment_options)
+        attach = attachmentDialog.findViewById(R.id.attach) as ImageView
+        camera = attachmentDialog.findViewById(R.id.camera) as ImageView
+        attach.setOnClickListener(this)
+        camera.setOnClickListener(this)
+        attachmentDialog.show()
+    }
+
+    fun getPath(uri : Uri): String {
+        val result: String
+        val cursor = activity?.contentResolver?.query(uri, null, null, null, null)
+        if (cursor == null) {
+            result = uri.path
+        } else {
+            cursor.moveToFirst()
+            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            result = cursor.getString(idx)
+            cursor.close()
+        }
+        return result
+    }
+
+    override fun previousScreen() {
+        super.previousScreen()
+        fragmentManager?.popBackStack()
+    }
+
+    override fun showSuccessMessage(response: DocumentResponseEntity) {
+        view?.let { Snackbar.make(it, response.message, Snackbar.LENGTH_LONG).show() }
+    }
+
+
 }

@@ -11,7 +11,10 @@ class OkHttpFactory {
     private lateinit var interceptor: HttpLoggingInterceptor
 
     fun prepareClientWithToken(token: String): OkHttpClient {
+        interceptor = HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
+                .addInterceptor(interceptor)
                 .addInterceptor { chain ->
                     val current = chain.request()
                     val newRequest = current.newBuilder().addHeader("Authorization", "Bearer ".plus(token))

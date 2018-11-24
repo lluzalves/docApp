@@ -24,22 +24,24 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
     }
 
 
-    fun createDocument(token: String, descriptor: String, file: File) {
+    fun createDocument(token: String, description: String, file: File, type: String, docType: String) {
         mvpView?.showRequestDialog("Please wait")
-        val descriptor = RequestBody.create(MediaType.parse("text/plain"), descriptor)
-        val userFile = RequestBody.create(MediaType.parse("image/jpg"), file)
+        val description = RequestBody.create(MediaType.parse("text/plain"), description)
+        val documentType = RequestBody.create(MediaType.parse("text/plain"), docType)
+        val userFile = RequestBody.create(MediaType.parse(type), file)
         val filePart = MultipartBody.Part.createFormData("file", file.name, userFile)
         var client = OkHttpFactory()
                 .prepareClientWithToken(token)
 
         RetrofitFactory().setRetrofit(client)
                 .create(DocumentService::class.java)
-                .createDocument(descriptor, filePart)
+                .createDocument(description, filePart, documentType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<DocumentResponseEntity> {
                     override fun onSuccess(response: DocumentResponseEntity) {
                         mvpView?.dismissRequestDialog()
+                        mMvpView?.showSuccessMessage(response)
                     }
 
                     override fun onSubscribe(d: Disposable) {
@@ -60,5 +62,6 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
         return folder
     }
 }
+
 
 

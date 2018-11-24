@@ -65,7 +65,7 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
 
     override fun showResponse(message: String) {
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
-        fragmentManager?.popBackStack()
+        previousScreen()
     }
 
     override fun onClick(view: View) {
@@ -80,6 +80,11 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
 
     override fun singUp() {
         presenter.createAccount(userName.text.toString(), userEmail.text.toString(), userPassword.text.toString())
+    }
+
+    override fun previousScreen() {
+        super.previousScreen()
+        fragmentManager?.popBackStack()
     }
 
 }
