@@ -12,7 +12,7 @@
     <dimen name="activity_horizontal_margin">10dp</dimen>
     <dimen name="imagewiew_icon_default_width">40dp</dimen>
     <dimen name="imagewiew_icon_default_height">40dp</dimen>
-    <dimen name="activity_default_margin_top">5dp</dimen>
+    <dimen name="activity_default_margin_top">20dp</dimen>
     <dimen name="textView_form_size">15dp</dimen>
     <dimen name="activity_default_margin_bottom">5dp</dimen>
     <dimen name="activity_default_margin_left">10dp</dimen>

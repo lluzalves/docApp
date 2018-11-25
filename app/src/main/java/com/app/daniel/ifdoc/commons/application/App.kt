@@ -2,11 +2,14 @@ package com.app.daniel.ifdoc.commons.application
 
 import android.app.Application
 
-class App :Application(){
-    lateinit var instance: App
+class App : Application() {
 
     override fun onCreate() {
+        appInstance = this
         super.onCreate()
-        instance = this
-     }
+    }
+
+    companion object {
+        lateinit var appInstance: App
+    }
 }

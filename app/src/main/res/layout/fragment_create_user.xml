@@ -4,16 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_blue"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.documents.add.AddDocumentFragment">
+
+    <LinearLayout
+        android:id="@+id/addDocumentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/create_user"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/activity_text_label_size"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
         android:layout_marginLeft="@dimen/activity_left_margin_default"
         android:layout_marginTop="@dimen/activity_default_margin_top"
-        android:layout_gravity="start"
         android:text="@string/label_name"
         android:textColor="@android:color/white"
         android:textSize="@dimen/activity_text_label_size"
@@ -23,7 +41,8 @@
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-             android:backgroundTint="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/white"
         android:ems="10"
         android:gravity="center"
         android:imeOptions="actionNext"
@@ -34,9 +53,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
         android:layout_marginLeft="@dimen/activity_left_margin_default"
         android:layout_marginTop="@dimen/activity_default_margin_top"
-        android:layout_gravity="start"
         android:text="@string/label_email"
         android:textColor="@android:color/white"
         android:textSize="@dimen/activity_text_label_size"
@@ -57,10 +76,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
         android:layout_marginLeft="@dimen/activity_left_margin_default"
         android:layout_marginTop="@dimen/activity_default_margin_top"
         android:text="@string/label_password"
-        android:layout_gravity="start"
         android:textColor="@android:color/white"
         android:textSize="@dimen/activity_text_label_size"
         android:textStyle="bold" />
@@ -84,6 +103,5 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:focusable="true"
-        android:visibility="invisible"
         app:srcCompat="@drawable/ic_done_24dp" />
 </LinearLayout>

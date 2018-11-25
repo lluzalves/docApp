@@ -36,14 +36,6 @@ data class UserEntity(
         val tokenExpirationDate: String
 ) : BaseEntity, JsonConvertable {
 
-    lateinit var json: String
-
-    override fun toJson(): String {
-        return super.toJson()
-    }
-
-    val user = json.toObject<UserEntity>()
-
     companion object {
         const val NAME = "users"
 

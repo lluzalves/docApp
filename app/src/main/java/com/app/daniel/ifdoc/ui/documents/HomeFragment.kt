@@ -43,6 +43,10 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
         }
     }
 
+    override fun showDocuments() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun showResponse(message: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -51,13 +55,6 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun uploadList() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun uploadDocument() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     override fun onClick(view: View?) {
         when (view) {
@@ -66,9 +63,7 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
                 val bundle = Bundle()
                 bundle.putInt("view_to_circular_animation_x", createDocument.x.toInt())
                 bundle.putInt("view_to_circular_animation_y", createDocument.y.toInt())
-                fragmentManager?.let { manager ->
-                    FragmentReplacer().replaceFragment(fragment, manager, bundle, R.id.container)
-                }
+                fragmentManager?.let { manager -> FragmentReplacer().addFragment(fragment, manager, bundle, R.id.container) }
             }
         }
     }

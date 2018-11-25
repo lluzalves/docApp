@@ -2,13 +2,14 @@ package com.app.daniel.ifdoc.domain.repository.documents
 
 import android.app.Application
 import com.app.daniel.ifdoc.data.dao.DocsRoomDatabase
-import com.app.daniel.ifdoc.data.entities.responses.DocumentEntity
+import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
 import io.reactivex.Completable
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 class DocumentRepository constructor(application: Application) {
-    var database = DocsRoomDatabase.getDatabase(application)
+    var database = DocsRoomDatabase.getDatabase(application.applicationContext)
     var dao = database?.documentsDao
 
 
@@ -18,23 +19,29 @@ class DocumentRepository constructor(application: Application) {
         }
     }
 
-    fun insertDocument(document: Document) {
+    fun insertDocument(document: DocumentEntity) {
         Completable.fromAction {
-            dao?.insertDocument(document as DocumentEntity)
+            dao?.insertDocument(document)
         }.subscribeOn(Schedulers.io())
                 .subscribe()
     }
 
-    fun deleteDocument(document: Document) {
+    fun insertDocuments(document: List<DocumentEntity>): Single<Array<Long>> {
+        return Single.fromCallable {
+            dao?.insertDocuments(document)
+        }
+    }
+
+    fun deleteDocument(document: DocumentEntity) {
         Completable.fromAction {
-            dao?.deleteDocument(document as DocumentEntity)
+            dao?.deleteDocument(document)
         }.subscribeOn(Schedulers.io())
                 .subscribe()
     }
 
-    fun updateDocument(document: Document) {
+    fun updateDocument(document: DocumentEntity) {
         Completable.fromAction {
-            dao?.updateDocument(document as DocumentEntity)
+            dao?.updateDocument(document)
         }.subscribeOn(Schedulers.io())
                 .subscribe()
     }

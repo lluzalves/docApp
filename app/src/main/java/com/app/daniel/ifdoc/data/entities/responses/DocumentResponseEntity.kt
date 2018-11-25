@@ -1,6 +1,6 @@
-package com.app.daniel.ifdoc.data.entities
+package com.app.daniel.ifdoc.data.entities.responses
 
-import com.app.daniel.ifdoc.data.entities.responses.DocumentEntity
+import com.app.daniel.ifdoc.data.entities.DocumentEntity
 
 data class DocumentResponseEntity (
     var message: String,

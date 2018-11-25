@@ -1,6 +1,6 @@
 package com.app.daniel.ifdoc.domain.repository.documents
 
-import com.app.daniel.ifdoc.data.entities.responses.DocumentEntity
+import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
 
     internal fun DocumentEntity.toDocument() = Document(

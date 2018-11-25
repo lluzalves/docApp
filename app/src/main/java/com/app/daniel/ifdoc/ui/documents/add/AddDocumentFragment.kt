@@ -21,7 +21,7 @@ import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.input.image.ImageDecoder
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
-import com.app.daniel.ifdoc.data.entities.DocumentResponseEntity
+import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.ui.user.register.AddDocumentPresenter
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import com.google.android.material.snackbar.Snackbar
@@ -129,9 +129,13 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
     override fun onClick(view: View) {
         when (view) {
             sendDocument -> {
-                val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-                checkNetwork(view.context)
+                if (docDescription.text.toString().isEmpty() || !::pictureFile.isInitialized || !::savedPicture.isInitialized) {
+                    view.let { Snackbar.make(it, getString(R.string.all_fields_are_required), Snackbar.LENGTH_LONG).show() }
+                } else {
+                    val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+                    checkNetwork(view.context)
+                }
             }
             takePicture -> {
                 showAttachmentDialog()
@@ -175,7 +179,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         attachmentDialog.show()
     }
 
-    fun getPath(uri : Uri): String {
+    private fun getPath(uri: Uri): String {
         val result: String
         val cursor = activity?.contentResolver?.query(uri, null, null, null, null)
         if (cursor == null) {
@@ -190,13 +194,11 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
     }
 
     override fun previousScreen() {
-        super.previousScreen()
         fragmentManager?.popBackStack()
     }
 
     override fun showSuccessMessage(response: DocumentResponseEntity) {
         view?.let { Snackbar.make(it, response.message, Snackbar.LENGTH_LONG).show() }
+        previousScreen()
     }
-
-
 }

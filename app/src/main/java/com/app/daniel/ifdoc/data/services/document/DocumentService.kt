@@ -1,7 +1,7 @@
 package com.app.daniel.ifdoc.data.services.document
 
 import com.app.daniel.ifdoc.commons.api.Constants
-import com.app.daniel.ifdoc.data.entities.DocumentResponseEntity
+import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

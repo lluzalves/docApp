@@ -71,9 +71,13 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     override fun onClick(view: View) {
         when (view) {
             createUser -> {
-                val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-                checkNetwork(view.context)
+                if (userEmail.text.toString().isEmpty() || userPassword.text.toString().isEmpty() || userName.text.toString().isEmpty()) {
+                    view.let { Snackbar.make(it, getString(R.string.all_fields_are_required), Snackbar.LENGTH_LONG).show() }
+                } else {
+                    val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+                    checkNetwork(view.context)
+                }
             }
         }
     }
@@ -83,7 +87,6 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     }
 
     override fun previousScreen() {
-        super.previousScreen()
         fragmentManager?.popBackStack()
     }
 

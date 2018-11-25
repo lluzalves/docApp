@@ -5,7 +5,7 @@ import android.os.Environment
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
 import com.app.daniel.ifdoc.commons.network.RetrofitFactory
-import com.app.daniel.ifdoc.data.entities.DocumentResponseEntity
+import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.services.document.DocumentService
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,16 +26,16 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
 
     fun createDocument(token: String, description: String, file: File, type: String, docType: String) {
         mvpView?.showRequestDialog("Please wait")
-        val description = RequestBody.create(MediaType.parse("text/plain"), description)
+        val documentDescription = RequestBody.create(MediaType.parse("text/plain"), description)
         val documentType = RequestBody.create(MediaType.parse("text/plain"), docType)
         val userFile = RequestBody.create(MediaType.parse(type), file)
         val filePart = MultipartBody.Part.createFormData("file", file.name, userFile)
-        var client = OkHttpFactory()
+        val client = OkHttpFactory()
                 .prepareClientWithToken(token)
 
         RetrofitFactory().setRetrofit(client)
                 .create(DocumentService::class.java)
-                .createDocument(description, filePart, documentType)
+                .createDocument(documentDescription, filePart, documentType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<DocumentResponseEntity> {
