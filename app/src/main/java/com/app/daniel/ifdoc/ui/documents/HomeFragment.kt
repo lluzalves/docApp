@@ -54,9 +54,17 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
         presenter.retrieveFetchedDocuments()
     }
 
+    override fun emptyDocuments() {
+        emptyHome.isVisible = true
+        pendingDocumentsLayout.isVisible = true
+        horizontalScrollView.isVisible = true
+    }
+
     override fun showDocuments(documents: List<Document>) {
         if (documents.isNullOrEmpty()) {
             emptyHome.isVisible = true
+            pendingDocumentsLayout.isVisible = true
+            horizontalScrollView.isVisible = true
         } else {
             emptyHome.isVisible = false
             context?.let {

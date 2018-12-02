@@ -9,6 +9,7 @@ import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.services.document.DocumentService
 import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
+import com.app.daniel.ifdoc.domain.repository.documents.toDocument
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -34,7 +35,12 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
                 .subscribe(object : SingleObserver<DocumentResponseEntity> {
                     override fun onSuccess(response: DocumentResponseEntity) {
                         mvpView?.dismissRequestDialog()
-                        storeDocuments(response.documents)
+                        var hasNoDocuments = response.documents.isNullOrEmpty()
+                        if (!hasNoDocuments) {
+                            storeDocuments(response.documents)
+                        } else {
+                            mMvpView?.emptyDocuments()
+                        }
                     }
 
                     override fun onSubscribe(d: Disposable) {

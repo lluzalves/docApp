@@ -9,6 +9,8 @@ interface MvpHomeView : MvpView {
 
     fun retrieveFetchedDocuments()
 
+    fun emptyDocuments()
+
     fun showDocuments(documents: List<Document>)
 
 }
