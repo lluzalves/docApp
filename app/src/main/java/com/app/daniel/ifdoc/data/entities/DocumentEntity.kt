@@ -33,6 +33,14 @@ data class DocumentEntity(
         @SerializedName(Field.FILE_URL)
         val fileUrl: String,
 
+        @ColumnInfo(name = "type")
+        @SerializedName(Field.TYPE)
+        val type: String,
+
+        @ColumnInfo(name = "isValidated")
+        @SerializedName(Field.IS_VALIDATED)
+        val isValidated: String,
+
         @ColumnInfo(name = "notification")
         @SerializedName(Field.NOTIFICATION)
         val notification: String
@@ -49,6 +57,8 @@ data class DocumentEntity(
             const val CREATED_AT = "created_at"
             const val UPDATED_AT = "updated_at"
             const val NOTIFICATION = "notification"
+            const val IS_VALIDATED = "is_validated"
+            const val TYPE = "type"
         }
     }
 }

@@ -7,6 +7,7 @@ import com.app.daniel.ifdoc.commons.network.RetrofitFactory
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.services.document.DocumentService
+import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +20,7 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
         mMvpView = mvpView
     }
 
-    fun checkUserDocuments(token: String) {
+    fun requestUserDocuments(token: String) {
         mvpView?.showRequestDialog("Please wait")
 
         var client = OkHttpFactory()
@@ -33,7 +34,7 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
                 .subscribe(object : SingleObserver<DocumentResponseEntity> {
                     override fun onSuccess(response: DocumentResponseEntity) {
                         mvpView?.dismissRequestDialog()
-                        parseandStore(response.documents)
+                        storeDocuments(response.documents)
                     }
 
                     override fun onSubscribe(d: Disposable) {
@@ -48,17 +49,17 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
                 })
     }
 
-    private fun parseandStore(documents: List<DocumentEntity>) {
+    private fun storeDocuments(documents: List<DocumentEntity>) {
         mvpView?.showRequestDialog("Fetching data")
         DocumentRepository(App.appInstance)
                 .insertDocuments(documents)
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Array<Long>> {
                     override fun onSuccess(databaseResponse: Array<Long>) {
                         mvpView?.dismissRequestDialog()
                         if (databaseResponse[0] > -1) {
-                            mvpView?.showDocuments()
+                            mvpView?.retrieveFetchedDocuments()
                         }
                     }
 
@@ -71,6 +72,28 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
                         mMvpView?.onError(throwable.localizedMessage)
                     }
 
+                })
+    }
+
+    fun retrieveFetchedDocuments() {
+        mvpView?.showRequestDialog("Loading")
+        DocumentRepository(App.appInstance).allDocuments()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SingleObserver<List<Document>?> {
+                    override fun onSuccess(documents: List<Document>) {
+                        mvpView?.dismissRequestDialog()
+                        mvpView?.showDocuments(documents)
+                    }
+
+                    override fun onSubscribe(disposable: Disposable) {
+
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        mvpView?.dismissRequestDialog()
+                        mvpView?.onError(throwable.localizedMessage)
+                    }
                 })
     }
 }

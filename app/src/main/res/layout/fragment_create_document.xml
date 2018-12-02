@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_blue"
+    android:background="@color/color_app_blue"
     android:gravity="center"
     android:orientation="vertical"
     tools:context="com.app.daniel.ifdoc.ui.documents.add.AddDocumentFragment">

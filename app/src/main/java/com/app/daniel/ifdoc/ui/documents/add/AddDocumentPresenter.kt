@@ -57,7 +57,7 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
     }
 
     fun setFolder(): File {
-        var folder = File(Environment.getExternalStorageDirectory(), "ifdocs/")
+        val folder = File(Environment.getExternalStorageDirectory(), "ifdocs/")
         folder.mkdirs()
         return folder
     }

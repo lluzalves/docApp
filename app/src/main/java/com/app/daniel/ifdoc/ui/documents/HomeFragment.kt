@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.view.FragmentReplacer
+import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.ui.documents.add.AddDocumentFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.app.daniel.ifdoc.commons.view.DivisorItens
 
 
 class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
 
     private lateinit var dialog: ProgressDialog
+    private lateinit var adapter: HomeAdapter
     private var presenter = HomePresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +30,9 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.checkUserDocuments(getToken())
+        presenter.requestUserDocuments(getToken())
         createDocument.setOnClickListener(this)
+
     }
 
     override fun connectionStatus(status: Boolean) {
@@ -43,8 +49,25 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
         }
     }
 
-    override fun showDocuments() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    override fun retrieveFetchedDocuments() {
+        presenter.retrieveFetchedDocuments()
+    }
+
+    override fun showDocuments(documents: List<Document>) {
+        if (documents.isNullOrEmpty()) {
+            emptyHome.isVisible = true
+        } else {
+            emptyHome.isVisible = false
+            context?.let {
+                adapter = HomeAdapter(documents, it)
+            }
+            var staggeredGridLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+            AllDocumentsRecycler.layoutManager = staggeredGridLayoutManager
+            context?.let { DivisorItens(it) }?.let { AllDocumentsRecycler.addItemDecoration(it) }
+            registerForContextMenu(AllDocumentsRecycler)
+            AllDocumentsRecycler.adapter = adapter
+        }
     }
 
     override fun showResponse(message: String) {

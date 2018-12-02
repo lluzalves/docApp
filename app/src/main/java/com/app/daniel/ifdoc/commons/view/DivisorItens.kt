@@ -10,27 +10,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.daniel.ifdoc.R
 
 
-class DivisorItens : RecyclerView.ItemDecoration() {
-
-    private lateinit var divisorItem: Drawable
-
-    fun DivisorItens(context: Context) {
-        divisorItem = getDrawable(context, R.drawable.divisor)!!
-    }
+class DivisorItens constructor(val context: Context) : RecyclerView.ItemDecoration() {
 
     override fun onDrawOver(c: Canvas, recyclerViewItem: RecyclerView) {
         val left = recyclerViewItem.paddingLeft
         val right = recyclerViewItem.width - recyclerViewItem.paddingRight
         val childCount = recyclerViewItem.childCount
 
+        var divisorItem : Drawable = getDrawable(context, R.drawable.divisor)!!
         for (i in 0 until childCount) {
             val child = recyclerViewItem.getChildAt(i)
             val params = child.layoutParams as RecyclerView.LayoutParams
             val top = child.bottom + params.bottomMargin
             val bottom = top + divisorItem.intrinsicHeight
-            divisorItem.setBounds(left, top, right, bottom)
-            divisorItem.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
-            divisorItem.draw(c)
+            divisorItem.let {
+                it.setBounds(left, top, right, bottom)
+                it.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN)
+                it.draw(c)
+            }
         }
     }
 }

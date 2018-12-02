@@ -82,8 +82,8 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
     }
 
     override fun storeToken(token: String) {
-        var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        var editor: SharedPreferences.Editor = preferences.edit()
+        val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor: SharedPreferences.Editor = preferences.edit()
         editor.putString(Base64Helper().encrypt("token"), Base64Helper().encrypt(token))
         editor.apply()
     }

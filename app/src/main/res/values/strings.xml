@@ -32,4 +32,13 @@
     <string name="fail_to_attach_image">Failure to attach image</string>
     <string name="all_fields_are_required">Atention, all fields are required. Please attach or take a picture and fill all forms fields</string>
     <string name="create_user">Register your account</string>
+    <string name="hello_user">Hello,</string>
+    <string name="hello_user_icon">Hello user icon</string>
+    <string name="more_actions_button">More actions button</string>
+    <string name="no_documents_for_user_layout">No document for users layout</string>
+    <string name="pending_action">Pending Actions</string>
+    <string name="all_documents">All documents</string>
+    <string name="document_label">Document</string>
+    <string name="status_label">Pending</string>
+    <string name="date_label">15/10/2018</string>
 </resources>

@@ -13,9 +13,11 @@ class DocumentRepository constructor(application: Application) {
     var dao = database?.documentsDao
 
 
-    fun allDocuments(): List<Document>? {
-        return dao?.allDocuments()?.map {
-            it.toDocument()
+    fun allDocuments(): Single<List<Document>> {
+        return Single.fromCallable {
+            dao?.allDocuments()?.map {
+                it.toDocument()
+            }
         }
     }
 
