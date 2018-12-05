@@ -24,7 +24,7 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
     fun requestUserDocuments(token: String) {
         mvpView?.showRequestDialog("Please wait")
 
-        var client = OkHttpFactory()
+        val client = OkHttpFactory()
                 .prepareClientWithToken(token)
 
         RetrofitFactory().setRetrofit(client)
@@ -35,7 +35,7 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
                 .subscribe(object : SingleObserver<DocumentResponseEntity> {
                     override fun onSuccess(response: DocumentResponseEntity) {
                         mvpView?.dismissRequestDialog()
-                        var hasNoDocuments = response.documents.isNullOrEmpty()
+                        val hasNoDocuments = response.documents.isNullOrEmpty()
                         if (!hasNoDocuments) {
                             storeDocuments(response.documents)
                         } else {

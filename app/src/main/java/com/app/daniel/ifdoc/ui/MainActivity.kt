@@ -14,7 +14,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         checkPermissions()
         if (savedInstanceState == null) {
-            var fragment = AuthFragment()
+            val fragment = AuthFragment()
             FragmentReplacer().loadInitialActivityFragment(fragment, this, R.id.container)
         }
     }

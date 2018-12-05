@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -55,31 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_menu_layout">
 
-        <TextView
-            android:id="@+id/pendingDocuments"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:text="@string/pending_action"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
     </LinearLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/emptyHome"
-        app:layout_constraintTop_toBottomOf="@+id/pendingDocumentsLayout">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notificationRecycler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </HorizontalScrollView>
 
     <LinearLayout
         android:id="@+id/emptyHome"
@@ -136,14 +113,13 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+        app:layout_constraintTop_toTopOf="@+id/pendingDocumentsLayout">
 
         <TextView
             android:id="@+id/AllDocuments"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="@string/all_documents"
@@ -156,6 +132,7 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         app:layout_constraintTop_toBottomOf="@+id/allDocumentsLayout">
 
         <androidx.recyclerview.widget.RecyclerView

@@ -21,8 +21,8 @@ import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.input.image.ImageDecoder
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
+import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
-import com.app.daniel.ifdoc.ui.user.register.AddDocumentPresenter
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_create_document.*

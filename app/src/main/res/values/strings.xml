@@ -41,4 +41,6 @@
     <string name="document_label">Document</string>
     <string name="status_label">Pending</string>
     <string name="date_label">15/10/2018</string>
+    <string name="delete">delete</string>
+    <string name="edit">edit</string>
 </resources>

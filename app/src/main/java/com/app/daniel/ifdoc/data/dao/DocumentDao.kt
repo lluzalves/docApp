@@ -19,5 +19,6 @@ interface DocumentDao {
     fun insertDocuments(documentEntity: List<DocumentEntity>) : Array<Long>
 
     @Delete
-    fun deleteDocument(documentEntity: DocumentEntity)
+    @Query("delete * from " + DocumentEntity.NAME + "where " + DocumentEntity.Companion.Field.ID + " =  :id")
+    fun deleteDocument(id: String)
 }
