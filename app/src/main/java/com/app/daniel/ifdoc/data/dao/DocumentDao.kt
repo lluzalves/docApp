@@ -18,7 +18,6 @@ interface DocumentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDocuments(documentEntity: List<DocumentEntity>) : Array<Long>
 
-    @Delete
-    @Query("delete * from " + DocumentEntity.NAME + "where " + DocumentEntity.Companion.Field.ID + " =  :id")
-    fun deleteDocument(id: String)
+    @Query("DELETE FROM documents WHERE id = :documentId")
+    fun deleteDocument(documentId: Int)
 }

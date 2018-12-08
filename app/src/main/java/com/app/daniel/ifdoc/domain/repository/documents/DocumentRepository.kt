@@ -34,7 +34,7 @@ class DocumentRepository constructor(application: Application) {
         }
     }
 
-    fun deleteDocument(id : String) {
+    fun deleteDocument(id : Int) {
         Completable.fromAction {
             dao?.deleteDocument(id)
         }.subscribeOn(Schedulers.io())
