@@ -17,7 +17,7 @@ import com.app.daniel.ifdoc.ui.documents.details.DocumentDetailFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.card_document.view.*
 
-class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Document>(view) {
+class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Document>(view), View.OnClickListener {
 
     lateinit var document: Document
     private val checker = StringChecker()

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
+import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.commons.view.FragmentReplacer
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document

@@ -14,12 +14,6 @@ abstract class BaseFragment : Fragment(), MvpView {
         retainInstance = true
     }
 
-    protected fun getToken(): String {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val encryptedToken = preferences.getString(Base64Helper().encrypt("token"), Base64Helper().encrypt("default"))
-        return Base64Helper().decrypt(encryptedToken)
-    }
-
     override fun onError(message: String) {
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
     }

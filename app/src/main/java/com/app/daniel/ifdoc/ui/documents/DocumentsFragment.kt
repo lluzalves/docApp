@@ -13,6 +13,7 @@ import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.ui.documents.add.AddDocumentFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.app.daniel.ifdoc.commons.network.Token
 import com.app.daniel.ifdoc.commons.view.DivisorItens
 
 
@@ -30,7 +31,7 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.requestUserDocuments(getToken())
+        presenter.requestUserDocuments(Token.getToken())
         createDocument.setOnClickListener(this)
 
     }
@@ -57,14 +58,12 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
     override fun emptyDocuments() {
         emptyHome.isVisible = true
         pendingDocumentsLayout.isVisible = true
-        horizontalScrollView.isVisible = true
     }
 
     override fun showDocuments(documents: List<Document>) {
         if (documents.isNullOrEmpty()) {
             emptyHome.isVisible = true
             pendingDocumentsLayout.isVisible = true
-            horizontalScrollView.isVisible = true
         } else {
             emptyHome.isVisible = false
             context?.let {

@@ -12,6 +12,7 @@ data class DocumentEntity(
         @PrimaryKey
         @NonNull
         @ColumnInfo(name = "id")
+        @SerializedName(Field.ID)
         override var id: Int,
 
         @ColumnInfo(name = "created_at")

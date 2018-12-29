@@ -16,6 +16,7 @@ import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.view.FragmentReplacer
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
+import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.commons.security.Base64Helper
 import com.app.daniel.ifdoc.ui.user.register.RegisterFragment
 import com.app.daniel.ifdoc.ui.documents.DocumentsFragment

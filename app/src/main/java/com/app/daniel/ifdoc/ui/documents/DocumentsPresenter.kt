@@ -23,7 +23,7 @@ class DocumentsPresenter : BasePresenter<DocumentsMvpView>() {
     fun requestUserDocuments(token: String) {
         mvpView?.showRequestDialog("Please wait")
 
-        var client = OkHttpFactory()
+        val client = OkHttpFactory()
                 .prepareClientWithToken(token)
 
         RetrofitFactory().setRetrofit(client)

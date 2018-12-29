@@ -21,7 +21,7 @@ class DocumentRepository constructor(application: Application) {
         }
     }
 
-    fun retrieveDocument(id: String) : Single<Document>{
+    fun retrieveDocument(id: String): Single<Document> {
         return Single.fromCallable {
             dao?.getDocument(id)?.toDocument()
         }
@@ -33,9 +33,9 @@ class DocumentRepository constructor(application: Application) {
         }
     }
 
-    fun deleteDocument(document: DocumentEntity): Single<Int> {
+    fun deleteDocument(documentId: Int): Single<Int> {
         return Single.fromCallable {
-            dao?.deleteDocument(document)
+            dao?.deleteDocument(documentId)
         }
     }
 

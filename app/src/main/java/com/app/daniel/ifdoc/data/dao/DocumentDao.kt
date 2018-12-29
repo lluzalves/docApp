@@ -10,17 +10,18 @@ interface DocumentDao {
     fun allDocuments(): List<DocumentEntity>
 
     @Update
-    fun updateDocument(documentEntity: DocumentEntity) : Int
+    fun updateDocument(documentEntity: DocumentEntity): Int
 
     @Insert
     fun insertDocument(documentEntity: DocumentEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDocuments(documentEntity: List<DocumentEntity>) : Array<Long>
+    fun insertDocuments(documentEntity: List<DocumentEntity>): Array<Long>
 
-    @Delete
-    fun deleteDocument(documentEntity: DocumentEntity) : Int
+    @Query("DELETE FROM documents WHERE id = :documentId")
+    fun deleteDocument(documentId: Int): Int
 
-    @Query("select * from " + DocumentEntity.NAME + " where " + DocumentEntity.Companion.Field.ID + " = :id")
+    @Query("SELECT * FROM documents WHERE id =  :id")
     fun getDocument(id: String): DocumentEntity
+
 }
