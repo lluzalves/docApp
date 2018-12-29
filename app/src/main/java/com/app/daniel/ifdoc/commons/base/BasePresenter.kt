@@ -38,7 +38,7 @@ open class BasePresenter<T : MvpView> : Presenter<T> {
                 override fun isOnline(result: Boolean) {
                     if (result) {
                         mMvpView?.dismissRequestDialog()
-                        mMvpView?.connectionStatus(result)
+                        mMvpView?.checkConnectionStatus(result)
                     }
                 }
             }

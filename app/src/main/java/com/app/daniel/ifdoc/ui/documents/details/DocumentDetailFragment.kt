@@ -1,41 +1,40 @@
-package com.app.daniel.ifdoc.ui.documents
+package com.app.daniel.ifdoc.ui.documents.details
 
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.view.FragmentReplacer
+import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.ui.documents.add.AddDocumentFragment
+import kotlinx.android.synthetic.main.fragment_document_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.app.daniel.ifdoc.commons.view.DivisorItens
 
 
-class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
+class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnClickListener {
 
     private lateinit var dialog: ProgressDialog
-    private lateinit var adapter: HomeAdapter
-    private var presenter = HomePresenter()
+    private lateinit var document: Document
+    private var presenter = DocumentDetailPresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         presenter.attachView(this)
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val bundle: Bundle = this.arguments!!
+        document = bundle.getSerializable(DocumentEntity.NAME) as Document
+        return inflater.inflate(R.layout.fragment_document_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.requestUserDocuments(getToken())
-        createDocument.setOnClickListener(this)
-
+        presenter.requestDocument(getToken(), documentId = document.id)
     }
 
-    override fun connectionStatus(status: Boolean) {
+    override fun checkConnectionStatus(status: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -49,40 +48,13 @@ class HomeFragment : BaseFragment(), MvpHomeView, View.OnClickListener {
         }
     }
 
-
-    override fun retrieveFetchedDocuments() {
-        presenter.retrieveFetchedDocuments()
-    }
-
-    override fun emptyDocuments() {
-        emptyHome.isVisible = true
-        pendingDocumentsLayout.isVisible = true
-        horizontalScrollView.isVisible = true
-    }
-
-    override fun showDocuments(documents: List<Document>) {
-        if (documents.isNullOrEmpty()) {
-            emptyHome.isVisible = true
-            pendingDocumentsLayout.isVisible = true
-            horizontalScrollView.isVisible = true
-        } else {
-            emptyHome.isVisible = false
-            context?.let {
-                adapter = HomeAdapter(documents, it)
-            }
-            var staggeredGridLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-            AllDocumentsRecycler.layoutManager = staggeredGridLayoutManager
-            context?.let { DivisorItens(it) }?.let { AllDocumentsRecycler.addItemDecoration(it) }
-            registerForContextMenu(AllDocumentsRecycler)
-            AllDocumentsRecycler.adapter = adapter
-        }
+    override fun showDocument(document: Document) {
+        description.text = document.description
+        status.text  = document.isValidated
+        type.text = document.type
     }
 
     override fun showResponse(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showLastUploads() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

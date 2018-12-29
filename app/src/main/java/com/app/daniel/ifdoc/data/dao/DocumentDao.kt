@@ -10,7 +10,7 @@ interface DocumentDao {
     fun allDocuments(): List<DocumentEntity>
 
     @Update
-    fun updateDocument(documentEntity: DocumentEntity)
+    fun updateDocument(documentEntity: DocumentEntity) : Int
 
     @Insert
     fun insertDocument(documentEntity: DocumentEntity)
@@ -19,5 +19,8 @@ interface DocumentDao {
     fun insertDocuments(documentEntity: List<DocumentEntity>) : Array<Long>
 
     @Delete
-    fun deleteDocument(documentEntity: DocumentEntity)
+    fun deleteDocument(documentEntity: DocumentEntity) : Int
+
+    @Query("select * from " + DocumentEntity.NAME + " where " + DocumentEntity.Companion.Field.ID + " = :id")
+    fun getDocument(id: String): DocumentEntity
 }

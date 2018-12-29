@@ -9,16 +9,15 @@ import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.services.document.DocumentService
 import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
-import com.app.daniel.ifdoc.domain.repository.documents.toDocument
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class HomePresenter : BasePresenter<MvpHomeView>() {
+class DocumentsPresenter : BasePresenter<DocumentsMvpView>() {
 
-    override fun attachView(mvpView: MvpHomeView) {
-        mMvpView = mvpView
+    override fun attachView(documentDetailMvpView: DocumentsMvpView) {
+        mMvpView = documentDetailMvpView
     }
 
     fun requestUserDocuments(token: String) {
@@ -35,7 +34,7 @@ class HomePresenter : BasePresenter<MvpHomeView>() {
                 .subscribe(object : SingleObserver<DocumentResponseEntity> {
                     override fun onSuccess(response: DocumentResponseEntity) {
                         mvpView?.dismissRequestDialog()
-                        var hasNoDocuments = response.documents.isNullOrEmpty()
+                        val hasNoDocuments = response.documents.isNullOrEmpty()
                         if (!hasNoDocuments) {
                             storeDocuments(response.documents)
                         } else {

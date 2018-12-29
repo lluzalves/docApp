@@ -21,11 +21,10 @@ class DocumentRepository constructor(application: Application) {
         }
     }
 
-    fun insertDocument(document: DocumentEntity) {
-        Completable.fromAction {
-            dao?.insertDocument(document)
-        }.subscribeOn(Schedulers.io())
-                .subscribe()
+    fun retrieveDocument(id: String) : Single<Document>{
+        return Single.fromCallable {
+            dao?.getDocument(id)?.toDocument()
+        }
     }
 
     fun insertDocuments(document: List<DocumentEntity>): Single<Array<Long>> {
@@ -34,17 +33,15 @@ class DocumentRepository constructor(application: Application) {
         }
     }
 
-    fun deleteDocument(document: DocumentEntity) {
-        Completable.fromAction {
+    fun deleteDocument(document: DocumentEntity): Single<Int> {
+        return Single.fromCallable {
             dao?.deleteDocument(document)
-        }.subscribeOn(Schedulers.io())
-                .subscribe()
+        }
     }
 
-    fun updateDocument(document: DocumentEntity) {
-        Completable.fromAction {
+    fun updateDocument(document: DocumentEntity): Single<Int> {
+        return Single.fromCallable {
             dao?.updateDocument(document)
-        }.subscribeOn(Schedulers.io())
-                .subscribe()
+        }
     }
 }

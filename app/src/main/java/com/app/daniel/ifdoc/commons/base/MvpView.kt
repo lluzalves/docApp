@@ -2,7 +2,7 @@ package com.app.daniel.ifdoc.commons.base
 
 interface MvpView {
 
-    fun connectionStatus(status : Boolean)
+    fun checkConnectionStatus(status : Boolean)
 
     fun showRequestDialog(message : String)
 

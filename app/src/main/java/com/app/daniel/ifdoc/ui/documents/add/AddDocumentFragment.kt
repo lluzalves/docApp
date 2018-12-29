@@ -65,7 +65,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         spinner.onItemSelectedListener = this
     }
 
-    override fun connectionStatus(isRegistered: Boolean) {
+    override fun checkConnectionStatus(isRegistered: Boolean) {
         if (isRegistered) {
             activity?.contentResolver?.getType(savedPicture)?.let { presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type) }
         } else {

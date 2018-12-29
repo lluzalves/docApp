@@ -1,5 +1,7 @@
 package com.app.daniel.ifdoc.domain.model
 
+import java.io.Serializable
+
 data class Document(
         override var id: Int,
         override var created_at: String,
@@ -10,7 +12,7 @@ data class Document(
         val notification: String,
         val isValidated: String,
         val type: String
-) : BaseModel {
+) : Serializable, BaseModel {
 
     fun validateStatus(isValidated: String): String {
         return when (isValidated) {

@@ -37,7 +37,7 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
         textWatcher.input(userEmail, userPassword, userName, createUser)
     }
 
-    override fun connectionStatus(isRegistered: Boolean) {
+    override fun checkConnectionStatus(isRegistered: Boolean) {
         if (isRegistered) {
             singUp()
         } else {
@@ -58,7 +58,7 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     }
 
     override fun dismissRequestDialog() {
-        if (dialog != null && dialog.isShowing) {
+        if (dialog.isShowing) {
             dialog.dismiss()
         }
     }

@@ -18,9 +18,10 @@ import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
 import com.app.daniel.ifdoc.commons.security.Base64Helper
 import com.app.daniel.ifdoc.ui.user.register.RegisterFragment
-import com.app.daniel.ifdoc.ui.documents.HomeFragment
+import com.app.daniel.ifdoc.ui.documents.DocumentsFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.w3c.dom.DocumentFragment
 
 class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
 
@@ -54,7 +55,7 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         noConnection.isVisible = !isInternetAvailable
     }
 
-    override fun connectionStatus(status: Boolean) {
+    override fun checkConnectionStatus(status: Boolean) {
         showLogin(status)
     }
 
@@ -109,7 +110,7 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
     }
 
     override fun showHome() {
-        var fragment = HomeFragment()
+        var fragment = DocumentsFragment()
         val bundle = Bundle()
         bundle.putInt("view_to_circular_animation_x", noAccount.x.toInt())
         bundle.putInt("view_to_circular_animation_y", noAccount.y.toInt())

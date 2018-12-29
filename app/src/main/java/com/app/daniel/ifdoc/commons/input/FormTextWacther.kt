@@ -26,14 +26,13 @@ class FormTextWacther : TextWatcher {
     }
 
     override fun onTextChanged(sequence: CharSequence, start: Int, before: Int, count: Int) {
-        if (!EmailValidator().validateEmail(sequence.toString())) {
-            email.error = email.context.getString(R.string.error_email)
-        }
+
     }
 
     override fun afterTextChanged(s: Editable) {
-        if (!EmailValidator().validateEmail(s.toString())) {
+        if (!EmailValidator().validateEmail(email.text.toString())) {
             email.error = email.context.getString(R.string.error_email)
+            confirmAction.isVisible = false
         } else {
             confirmAction.isVisible = password.text.isNotBlank() && name.text.isNotBlank()
         }

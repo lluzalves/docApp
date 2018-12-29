@@ -1,124 +1,136 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_app_blue"
-    android:gravity="center"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.app.daniel.ifdoc.ui.documents.add.AddDocumentFragment">
 
-    <LinearLayout
-        android:id="@+id/addDocumentLayout"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:text="@string/add_a_new_document"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/activity_text_label_size"
+        android:textStyle="bold"/>
+
+
+    <ImageView
+        android:id="@+id/add_document_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_note_add" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/add_a_new_document"
-            android:textColor="@android:color/white"
+            android:id="@+id/title_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/label_description"
+            android:textColor="@color/color_app_blue"
             android:textSize="@dimen/activity_text_label_size"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/title_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:text="@string/label_description"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/activity_text_label_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/title_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_document_type"
+            android:textColor="@color/color_app_blue"
+            android:textSize="@dimen/activity_text_label_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/docDescription" />
 
-    <TextView
-        android:id="@+id/title_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/label_document_type"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/activity_text_label_size"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/docDescription" />
+        <EditText
+            android:id="@+id/docDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/color_app_blue"
+            android:ems="10"
+            android:gravity="center"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:textColor="@color/color_app_blue"
+            android:textColorHint="@color/color_app_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_description" />
 
-    <EditText
-        android:id="@+id/docDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/white"
-        android:ems="10"
-        android:gravity="center"
-        android:imeOptions="actionNext"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_description" />
+        <ImageView
+            android:id="@+id/sendDocument"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_done_24dp"
+            android:tint="@color/color_app_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/sendDocument"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_done_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/docDescription" />
+        <ImageView
+            android:id="@+id/takePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_camera_alt_"
+            android:tint="@color/color_app_blue"
+            app:layout_constraintBottom_toTopOf="@+id/title_description"
+            app:layout_constraintEnd_toEndOf="@+id/attachment"
+            app:layout_constraintStart_toStartOf="@+id/attachment" />
 
-    <ImageView
-        android:id="@+id/takePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_camera_alt_"
-        app:layout_constraintBottom_toTopOf="@+id/title_description"
-        app:layout_constraintEnd_toEndOf="@+id/attachment"
-        app:layout_constraintStart_toStartOf="@+id/attachment" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/color_app_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/title_type"
+            app:layout_constraintRight_toRightOf="@+id/title_type"
+            app:layout_constraintStart_toEndOf="@+id/title_type"
+            app:layout_constraintTop_toTopOf="@+id/title_type" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:backgroundTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/title_type"
-        app:layout_constraintRight_toRightOf="@+id/title_type"
-        app:layout_constraintStart_toEndOf="@+id/title_type"
-        app:layout_constraintTop_toTopOf="@+id/title_type" />
+        <ImageView
+            android:id="@+id/attachment"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:tint="@color/color_app_blue"
+            android:src="@drawable/ic_insert_drive_file"
+            app:layout_constraintBottom_toTopOf="@+id/takePicture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/attachment"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_insert_drive_file"
-        app:layout_constraintBottom_toTopOf="@+id/takePicture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addDocumentLayout" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
