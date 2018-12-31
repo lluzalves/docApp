@@ -14,11 +14,11 @@ data class Document(
         val type: String
 ) : Serializable, BaseModel {
 
-    fun validateStatus(isValidated: String): String {
+    fun statusDescription(isValidated: String): String {
         return when (isValidated) {
             "1" -> "Validado"
-            "0" -> "Pendente"
-            else -> "In progress"
+            "0" -> "Em análise"
+            else -> "Pendente"
         }
     }
 }

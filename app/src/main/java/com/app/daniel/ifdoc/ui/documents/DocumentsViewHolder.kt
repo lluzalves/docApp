@@ -34,7 +34,7 @@ class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Doc
         moreOptions.setOnClickListener(this)
         documentType.text = checker.nullToDash(document.type)
         documentData.text = checker.nullToDash(document.updated_at)
-        documentStatus.text = checker.nullToDash(document.validateStatus(document.isValidated))
+        documentStatus.text = checker.nullToDash(document.statusDescription(document.isValidated))
     }
 
     override fun onClick(view: View) {

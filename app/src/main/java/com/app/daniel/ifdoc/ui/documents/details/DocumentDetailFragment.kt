@@ -51,8 +51,16 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
 
     override fun showDocument(document: Document) {
         description.text = document.description
-        status.text  = document.isValidated
         type.text = document.type
+        isDocumentValidated(document.isValidated)
+    }
+
+    private fun isDocumentValidated(isValidated: String) {
+        if(isValidated == "0"){
+            docEdit.setTextColor(resources.getColor(R.color.material_grey_600))
+            docDelete.setTextColor(resources.getColor(R.color.material_grey_600))
+        }
+        docStatus.text = document.statusDescription(isValidated)
     }
 
     override fun showResponse(message: String) {

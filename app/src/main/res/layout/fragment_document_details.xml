@@ -53,7 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/docStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -191,6 +191,7 @@
                 android:padding="20dp">
 
                 <TextView
+                    android:id="@+id/docEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -240,6 +241,7 @@
                 android:padding="20dp">
 
                 <TextView
+                    android:id="@+id/docDelete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
