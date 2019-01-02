@@ -12,6 +12,7 @@ import com.app.daniel.ifdoc.commons.view.FragmentReplacer
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.ui.documents.add.AddDocumentFragment
+import kotlinx.android.synthetic.main.fragment_create_document.*
 import kotlinx.android.synthetic.main.fragment_document_details.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -56,7 +57,7 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
     }
 
     private fun isDocumentValidated(isValidated: String) {
-        if(isValidated == "0"){
+        if (isValidated == "0") {
             docEdit.setTextColor(resources.getColor(R.color.material_grey_600))
             docDelete.setTextColor(resources.getColor(R.color.material_grey_600))
         }

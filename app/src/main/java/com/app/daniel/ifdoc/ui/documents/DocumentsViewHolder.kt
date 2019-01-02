@@ -25,13 +25,11 @@ class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Doc
     val documentType: TextView by lazy { view.documentType }
     val documentData: TextView by lazy { view.documentDate }
     val documentStatus: TextView by lazy { view.documentStatus }
-    val moreOptions: ImageView by lazy { view.moreOptionsDocument }
 
     override fun show(document: Document) {
 
         this.document = document
         card.setOnClickListener(this)
-        moreOptions.setOnClickListener(this)
         documentType.text = checker.nullToDash(document.type)
         documentData.text = checker.nullToDash(document.updated_at)
         documentStatus.text = checker.nullToDash(document.statusDescription(document.isValidated))
@@ -39,9 +37,6 @@ class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Doc
 
     override fun onClick(view: View) {
         when (view) {
-            moreOptions -> {
-                Snackbar.make(view, "Soon", Snackbar.LENGTH_LONG).show()
-            }
             card -> {
                 val bundle = Bundle()
                 bundle.putSerializable(DocumentEntity.NAME, document)
