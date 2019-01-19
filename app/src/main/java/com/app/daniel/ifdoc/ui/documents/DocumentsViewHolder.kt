@@ -42,7 +42,7 @@ class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Doc
                 bundle.putSerializable(DocumentEntity.NAME, document)
                 val fragment = DocumentDetailFragment()
                 val manager = (context as AppCompatActivity).supportFragmentManager
-                FragmentReplacer().addFragment(fragment, manager, bundle, R.id.container)
+                FragmentReplacer().replaceFragment(fragment, manager, bundle, R.id.container)
             }
         }
     }
