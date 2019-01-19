@@ -64,8 +64,8 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
             emptyHome.isVisible = true
             allDocumentsLayout.isVisible = false
         } else {
-            emptyHome.isVisible = true
-            allDocumentsLayout.isVisible = false
+            emptyHome.isVisible = false
+            allDocumentsLayout.isVisible = true
             context?.let {
                 adapter = DocumentsAdapter(documents, it)
             }
@@ -93,7 +93,7 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
                 val bundle = Bundle()
                 bundle.putInt("view_to_circular_animation_x", createDocument.x.toInt())
                 bundle.putInt("view_to_circular_animation_y", createDocument.y.toInt())
-                fragmentManager?.let { manager -> FragmentReplacer().addFragment(fragment, manager, bundle, R.id.container) }
+                fragmentManager?.let { manager -> FragmentReplacer().replaceFragment(fragment, manager, bundle, R.id.container) }
             }
         }
     }

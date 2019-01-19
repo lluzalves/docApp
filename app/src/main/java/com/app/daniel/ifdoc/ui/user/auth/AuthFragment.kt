@@ -22,7 +22,6 @@ import com.app.daniel.ifdoc.ui.user.register.RegisterFragment
 import com.app.daniel.ifdoc.ui.documents.DocumentsFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
-import org.w3c.dom.DocumentFragment
 
 class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
 

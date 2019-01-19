@@ -33,7 +33,6 @@ import java.io.FileNotFoundException
 
 class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
     private lateinit var dialog: ProgressDialog
-    private lateinit var attach: ImageView
     private lateinit var camera: ImageView
     private lateinit var attachmentDialog: Dialog
     private lateinit var type: String
@@ -100,7 +99,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                cameraRequest -> insertPhoto(attachment, pictureFile.absolutePath)
+                cameraRequest -> insertFromCamera(attachment, pictureFile.absolutePath)
                 attachmentRequest -> data?.let { insertAttachment(it) }
             }
         }
@@ -120,9 +119,9 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
 
     }
 
-    private fun insertPhoto(imageView: ImageView, absolutePath: String) {
-        val bitmap = ImageDecoder().decodeSampleBitmapFromUri(absolutePath, 100, 100)
-        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+    private fun insertFromCamera(imageView: ImageView, absolutePath: String) {
+        val bitmap = ImageDecoder().decodeSampleBitmapFromUri(absolutePath, 200, 200)
+        imageView.scaleType = ImageView.ScaleType.CENTER
         imageView.setImageBitmap(bitmap)
     }
 
@@ -140,7 +139,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
             takePicture -> {
                 showAttachmentDialog()
             }
-            attach -> {
+            attachment -> {
                 attachmentDialog.dismiss()
                 val photoPickerIntent = Intent(Intent.ACTION_PICK)
                 photoPickerIntent.type = "image/*"
@@ -172,9 +171,8 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
     private fun showAttachmentDialog() {
         attachmentDialog = Dialog(context)
         attachmentDialog.setContentView(R.layout.dialog_attachment_options)
-        attach = attachmentDialog.findViewById(R.id.attach) as ImageView
         camera = attachmentDialog.findViewById(R.id.camera) as ImageView
-        attach.setOnClickListener(this)
+        attachment.setOnClickListener(this)
         camera.setOnClickListener(this)
         attachmentDialog.show()
     }
@@ -199,6 +197,6 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
 
     override fun showSuccessMessage(response: DocumentResponseEntity) {
         view?.let { Snackbar.make(it, response.message, Snackbar.LENGTH_LONG).show() }
-        previousScreen()
+        presenter.updateLocalDatabase(response.documents)
     }
 }

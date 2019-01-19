@@ -107,7 +107,7 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:backgroundTint="@color/color_app_blue"
@@ -118,15 +118,13 @@
 
         <ImageView
             android:id="@+id/attachment"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:tint="@color/color_app_blue"
-            android:src="@drawable/ic_insert_drive_file"
             app:layout_constraintBottom_toTopOf="@+id/takePicture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
