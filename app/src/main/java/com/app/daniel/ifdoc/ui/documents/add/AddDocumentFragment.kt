@@ -23,7 +23,9 @@ import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.input.image.ImageDecoder
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
 import com.app.daniel.ifdoc.commons.network.Token.getToken
+import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
+import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_create_document.*
@@ -34,9 +36,10 @@ import java.io.FileNotFoundException
 class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
     private lateinit var dialog: ProgressDialog
     private lateinit var camera: ImageView
-    private lateinit var attach : ImageView
+    private lateinit var attach: ImageView
     private lateinit var attachmentDialog: Dialog
     private lateinit var type: String
+    private var document: Document? = null
     private var presenter = AddDocumentPresenter()
     private val cameraRequest = 1888
     private val attachmentRequest = 1887
@@ -52,6 +55,14 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (this.arguments != null) {
+            val bundle: Bundle = this.arguments!!
+            document = bundle.getSerializable(DocumentEntity.NAME) as Document
+            if (document != null) {
+                labelDocument.text = getString(R.string.edit_document)
+                docDescription.setText(document!!.description)
+            }
+        }
         sendDocument.setOnClickListener(this)
         takePicture.setOnClickListener(this)
         folder = presenter.setFolder()
@@ -67,7 +78,13 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
 
     override fun checkConnectionStatus(isRegistered: Boolean) {
         if (isRegistered) {
-            activity?.contentResolver?.getType(savedPicture)?.let { presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type) }
+            var id = ""
+            if(document!=null){
+               id = document!!.id.toString()
+            }
+            activity?.contentResolver?.getType(savedPicture)?.let {
+                    presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type,id)
+            }
         } else {
             view?.let { Snackbar.make(it, getString(R.string.register_failure), Snackbar.LENGTH_LONG).show() }
         }
@@ -93,7 +110,6 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
 
     override fun showResponse(message: String) {
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
-        fragmentManager?.popBackStack()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -115,7 +131,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
             attachment.setImageBitmap(selectedImage)
             attachment.setOnClickListener(this)
         } catch (e: FileNotFoundException) {
-            Log.d("ifdoc","Failed to attach file into imageview ".plus(e.localizedMessage))
+            Log.d("ifdoc", "Failed to attach file into imageview ".plus(e.localizedMessage))
             view?.let { Snackbar.make(it, getString(R.string.fail_to_attach_image), Snackbar.LENGTH_LONG).show() }
         }
 
@@ -194,7 +210,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         return result
     }
 
-      override fun showSuccessMessage(response: DocumentResponseEntity) {
+    override fun showSuccessMessage(response: DocumentResponseEntity) {
         view?.let { Snackbar.make(it, response.message, Snackbar.LENGTH_LONG).show() }
         presenter.updateLocalDatabase(response.documents)
     }

@@ -7,7 +7,6 @@ data class Document(
         override var created_at: String,
         override var updated_at: String,
         val description: String,
-        val fileUrl: String,
         val userId: Int,
         val notification: String,
         val isValidated: String,

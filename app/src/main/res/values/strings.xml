@@ -46,4 +46,6 @@
     <string name="label_attachment">Attachment</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="unable_to_delete">This document is already validated, unable to delete</string>
+    <string name="edit_document">Editar documento</string>
 </resources>

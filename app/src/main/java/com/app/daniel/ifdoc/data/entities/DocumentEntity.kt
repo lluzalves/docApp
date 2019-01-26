@@ -31,10 +31,6 @@ data class DocumentEntity(
         @SerializedName(Field.DESCRIPTION)
         val description: String,
 
-        @ColumnInfo(name = "file_url")
-        @SerializedName(Field.FILE_URL)
-        val fileUrl: String,
-
         @ColumnInfo(name = "type")
         @SerializedName(Field.TYPE)
         val type: String,

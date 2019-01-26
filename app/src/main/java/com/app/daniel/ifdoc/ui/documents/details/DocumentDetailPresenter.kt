@@ -1,5 +1,6 @@
 package com.app.daniel.ifdoc.ui.documents.details
 
+import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.application.App
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
@@ -12,7 +13,6 @@ import com.app.daniel.ifdoc.data.services.document.DocumentService
 import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
 import com.app.daniel.ifdoc.domain.repository.documents.toDocument
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -84,7 +84,7 @@ class DocumentDetailPresenter : BasePresenter<DocumentDetailMvpView>() {
                 })
     }
 
-    private fun deleteDocument(document: Document) {
+    fun deleteDocument(document: Document) {
         mvpView?.showRequestDialog("Aguarde")
         val client = OkHttpFactory()
                 .prepareClientWithToken(Token.getToken())
@@ -96,7 +96,7 @@ class DocumentDetailPresenter : BasePresenter<DocumentDetailMvpView>() {
                 .subscribe(object : SingleObserver<BaseResponseEntity> {
                     override fun onSuccess(response: BaseResponseEntity) {
                         mvpView?.dismissRequestDialog()
-                        DocumentRepository(App.appInstance).deleteDocument(document.id)
+                        deleteLocalReplica(document)
                     }
 
                     override fun onSubscribe(d: Disposable) {
@@ -107,6 +107,31 @@ class DocumentDetailPresenter : BasePresenter<DocumentDetailMvpView>() {
                         mvpView?.dismissRequestDialog()
                         mvpView?.onError(e.localizedMessage)
                     }
+                })
+    }
+
+    private fun deleteLocalReplica(document: Document) {
+        DocumentRepository(App.appInstance).deleteDocument(document.id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SingleObserver<Int> {
+                    override fun onSuccess(databaseResponse: Int) {
+                        mvpView?.dismissRequestDialog()
+                        if (databaseResponse > -1) {
+                            mMvpView?.showResponse("Deletado com sucesso")
+                            mvpView?.nextScreen(R.id.documentsFragment)
+                        }
+                    }
+
+                    override fun onSubscribe(disposable: Disposable) {
+
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        mvpView?.dismissRequestDialog()
+                        mMvpView?.onError(throwable.localizedMessage)
+                    }
+
                 })
     }
 
