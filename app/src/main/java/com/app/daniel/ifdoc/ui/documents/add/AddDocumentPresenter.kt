@@ -2,6 +2,7 @@ package com.app.daniel.ifdoc.ui.documents.add
 
 
 import android.os.Environment
+import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.application.App
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
@@ -74,7 +75,7 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
                 .subscribe(object : SingleObserver<Array<Long>> {
                     override fun onSuccess(databaseResponse: Array<Long>) {
                         mvpView?.dismissRequestDialog()
-                        mvpView?.previousScreen()
+                        mvpView?.nextScreen(R.id.documentsFragment)
                     }
 
                     override fun onSubscribe(disposable: Disposable) {

@@ -1,10 +1,10 @@
 package com.app.daniel.ifdoc.ui
 
 import android.os.Bundle
+import androidx.navigation.Navigation
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseActivity
-import com.app.daniel.ifdoc.commons.view.FragmentReplacer
-import com.app.daniel.ifdoc.ui.user.auth.AuthFragment
+
 
 
 class MainActivity : BaseActivity() {
@@ -14,8 +14,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         checkPermissions()
         if (savedInstanceState == null) {
-            val fragment = AuthFragment()
-            FragmentReplacer().loadInitialActivityFragment(fragment, this, R.id.container)
+            Navigation.findNavController(this,R.id.nav_host_fragment).navigate(R.id.authFragment)
         }
     }
 }

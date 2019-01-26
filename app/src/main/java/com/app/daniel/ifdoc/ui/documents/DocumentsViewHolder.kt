@@ -3,18 +3,14 @@ package com.app.daniel.ifdoc.ui.documents
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseViewHolder
 import com.app.daniel.ifdoc.commons.input.StringChecker
-import com.app.daniel.ifdoc.commons.view.FragmentReplacer
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
-import com.app.daniel.ifdoc.ui.documents.details.DocumentDetailFragment
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.card_document.view.*
 
 class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Document>(view), View.OnClickListener {
@@ -40,9 +36,7 @@ class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Doc
             card -> {
                 val bundle = Bundle()
                 bundle.putSerializable(DocumentEntity.NAME, document)
-                val fragment = DocumentDetailFragment()
-                val manager = (context as AppCompatActivity).supportFragmentManager
-                FragmentReplacer().replaceFragment(fragment, manager, bundle, R.id.container)
+                Navigation.findNavController(view).navigate(R.id.documentDetailFragment, bundle)
             }
         }
     }

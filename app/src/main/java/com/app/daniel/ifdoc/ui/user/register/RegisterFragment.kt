@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.Navigation
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.input.FormTextWacther
@@ -65,7 +66,7 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
 
     override fun showResponse(message: String) {
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
-        previousScreen()
+        nextScreen(R.id.authFragment)
     }
 
     override fun onClick(view: View) {
@@ -84,10 +85,6 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
 
     override fun singUp() {
         presenter.createAccount(userName.text.toString(), userEmail.text.toString(), userPassword.text.toString())
-    }
-
-    override fun previousScreen() {
-        fragmentManager?.popBackStack()
     }
 
 }

@@ -12,7 +12,5 @@ interface MvpView {
 
     fun showResponse(message: String)
 
-    fun previousScreen()
-
     fun nextScreen(flowIntention: Int)
 }

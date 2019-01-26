@@ -12,14 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import com.app.daniel.ifdoc.R
-import com.app.daniel.ifdoc.commons.view.FragmentReplacer
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
 import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.commons.security.Base64Helper
-import com.app.daniel.ifdoc.ui.user.register.RegisterFragment
-import com.app.daniel.ifdoc.ui.documents.DocumentsFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -102,19 +100,11 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
     }
 
     override fun showSignUp() {
-        var fragment = RegisterFragment()
-        val bundle = Bundle()
-        bundle.putInt("view_to_circular_animation_x", noAccount.x.toInt())
-        bundle.putInt("view_to_circular_animation_y", noAccount.y.toInt())
-        fragmentManager?.let { manager -> FragmentReplacer().addFragment(fragment, manager, bundle, R.id.container) }
+        view?.let { Navigation.findNavController(it).navigate(R.id.registerFragment) }
     }
 
     override fun showHome() {
-        var fragment = DocumentsFragment()
-        val bundle = Bundle()
-        bundle.putInt("view_to_circular_animation_x", noAccount.x.toInt())
-        bundle.putInt("view_to_circular_animation_y", noAccount.y.toInt())
-        fragmentManager?.let { manager -> FragmentReplacer().replaceFragment(fragment, manager, bundle, R.id.container) }
+        view?.let { Navigation.findNavController(it).navigate(R.id.documentsFragment) }
     }
 
     override fun showRecoverPassword() {

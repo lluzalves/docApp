@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
-import com.app.daniel.ifdoc.commons.view.FragmentReplacer
-import com.app.daniel.ifdoc.domain.model.Document
-import com.app.daniel.ifdoc.ui.documents.add.AddDocumentFragment
-import kotlinx.android.synthetic.main.fragment_home.*
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.app.daniel.ifdoc.commons.network.Token
 import com.app.daniel.ifdoc.commons.view.DivisorItens
+import com.app.daniel.ifdoc.domain.model.Document
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener {
@@ -89,11 +87,7 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
     override fun onClick(view: View?) {
         when (view) {
             createDocument -> {
-                var fragment = AddDocumentFragment()
-                val bundle = Bundle()
-                bundle.putInt("view_to_circular_animation_x", createDocument.x.toInt())
-                bundle.putInt("view_to_circular_animation_y", createDocument.y.toInt())
-                fragmentManager?.let { manager -> FragmentReplacer().replaceFragment(fragment, manager, bundle, R.id.container) }
+                nextScreen(R.id.addDocumentFragment)
             }
         }
     }

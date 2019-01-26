@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,6 @@ import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_create_document.*
-import timber.log.Timber
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -34,6 +34,7 @@ import java.io.FileNotFoundException
 class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
     private lateinit var dialog: ProgressDialog
     private lateinit var camera: ImageView
+    private lateinit var attach : ImageView
     private lateinit var attachmentDialog: Dialog
     private lateinit var type: String
     private var presenter = AddDocumentPresenter()
@@ -112,8 +113,9 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
             val imageStream = activity?.contentResolver?.openInputStream(savedPicture)
             val selectedImage = BitmapFactory.decodeStream(imageStream)
             attachment.setImageBitmap(selectedImage)
+            attachment.setOnClickListener(this)
         } catch (e: FileNotFoundException) {
-            Timber.tag("ifdoc").e("Failed to attach file into imageview ".plus(e.localizedMessage))
+            Log.d("ifdoc","Failed to attach file into imageview ".plus(e.localizedMessage))
             view?.let { Snackbar.make(it, getString(R.string.fail_to_attach_image), Snackbar.LENGTH_LONG).show() }
         }
 
@@ -139,7 +141,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
             takePicture -> {
                 showAttachmentDialog()
             }
-            attachment -> {
+            attach -> {
                 attachmentDialog.dismiss()
                 val photoPickerIntent = Intent(Intent.ACTION_PICK)
                 photoPickerIntent.type = "image/*"
@@ -172,8 +174,9 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         attachmentDialog = Dialog(context)
         attachmentDialog.setContentView(R.layout.dialog_attachment_options)
         camera = attachmentDialog.findViewById(R.id.camera) as ImageView
-        attachment.setOnClickListener(this)
+        attach = attachmentDialog.findViewById(R.id.attach) as ImageView
         camera.setOnClickListener(this)
+        attach.setOnClickListener(this)
         attachmentDialog.show()
     }
 
@@ -191,11 +194,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         return result
     }
 
-    override fun previousScreen() {
-        fragmentManager?.popBackStack()
-    }
-
-    override fun showSuccessMessage(response: DocumentResponseEntity) {
+      override fun showSuccessMessage(response: DocumentResponseEntity) {
         view?.let { Snackbar.make(it, response.message, Snackbar.LENGTH_LONG).show() }
         presenter.updateLocalDatabase(response.documents)
     }
