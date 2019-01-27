@@ -84,6 +84,7 @@ class DocumentDetailPresenter : BasePresenter<DocumentDetailMvpView>() {
                 })
     }
 
+
     fun deleteDocument(document: Document) {
         mvpView?.showRequestDialog("Aguarde")
         val client = OkHttpFactory()

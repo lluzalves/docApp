@@ -70,8 +70,7 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
     }
 
-
-    override fun onClick(view: View?) {
+     override fun onClick(view: View?) {
         when (view) {
             docEdit -> {
                 val bundle = Bundle()
