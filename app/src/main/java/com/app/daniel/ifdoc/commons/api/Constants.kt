@@ -3,7 +3,7 @@ package com.app.daniel.ifdoc.commons.api
 class Constants {
 
     object Api {
-        const val API_URL = "http://192.168.0.15/slim_app/public/"
+        const val API_URL = "http://18060e5c.ngrok.io/slim_app/public/"
     }
 
     object Endpoint {

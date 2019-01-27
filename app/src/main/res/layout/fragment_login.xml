@@ -158,16 +158,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/forgotPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="@string/forgot_password"
-            android:textStyle="bold" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_login_signup"
             android:layout_width="wrap_content"
