@@ -48,4 +48,7 @@
     <string name="delete">Delete</string>
     <string name="unable_to_delete">This document is already validated, unable to delete</string>
     <string name="edit_document">Editar documento</string>
+    <string name="app_name_terms">Terms of Use</string>
+    <string name="app_name_term">Terms of Use and Conditions</string>
+    <string name="terms_info">By sign in you accept our Terms and Conditions</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.app.daniel.ifdoc.ui.user.auth
 
 
+import androidx.navigation.Navigation
+import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
 import com.app.daniel.ifdoc.commons.network.RetrofitFactory
@@ -33,9 +35,8 @@ class AuthPresenter : BasePresenter<MvpAuthView>() {
                     override fun onSuccess(response: ResponseEntity) {
                         mMvpView?.dismissRequestDialog()
                         mvpView?.storeToken(response.token)
-                        mMvpView?.showHome()
+                        mvpView?.nextScreen(R.id.authFragment)
                     }
-
                     override fun onSubscribe(d: Disposable) {
 
                     }

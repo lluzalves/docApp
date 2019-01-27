@@ -35,13 +35,14 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (isTokenStored()) {
-            showHome()
+            Navigation.findNavController(view).navigate(R.id.documentsFragment)
         } else {
             context?.let { checkNetwork(it) }
         }
         checkConnection.setOnClickListener(this)
         noAccount.setOnClickListener(this)
         startLogin.setOnClickListener(this)
+        terms.setOnClickListener(this)
     }
 
     private fun isTokenStored(): Boolean {
@@ -90,21 +91,14 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
     override fun onClick(view: View) {
         when (view) {
             checkConnection -> checkNetwork(view.context)
-            noAccount -> showSignUp()
+            noAccount -> nextScreen(R.id.registerFragment)
+            terms -> nextScreen(R.id.termsAndConditionsFragment)
             startLogin -> {
                 val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
                 presenter.login(email.text.toString(), password.text.toString())
             }
         }
-    }
-
-    override fun showSignUp() {
-        view?.let { Navigation.findNavController(it).navigate(R.id.registerFragment) }
-    }
-
-    override fun showHome() {
-        view?.let { Navigation.findNavController(it).navigate(R.id.documentsFragment) }
     }
 
     override fun showRecoverPassword() {
