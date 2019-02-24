@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">ifDoc</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_files">Add a new document</string>
     <string name="login_page">Login</string>
     <string name="if_doc_app">ifDoc App</string>
@@ -22,14 +21,14 @@
     <string name="register_failure">Failed to register user, please try again</string>
     <string name="label_name">Name</string>
     <string name="label_password">Password</string>
-    <string name="error_email">Invalid email, please try again. Must be @ifsp.edu.br email</string>
+    <string name="error_email">Invalid email, please try again.</string>
     <string name="label_description">Description</string>
     <string name="label_document_type">Type</string>
     <string name="required_permissions">Permissions are required for the application to work properly</string>
     <string name="choose_option_attachment">Please, choose the source</string>
     <string name="add_a_new_document">Add new document</string>
     <string name="fail_to_attach_image">Failure to attach image</string>
-    <string name="all_fields_are_required">Atention, all fields are required. Please attach or take a picture and fill all forms fields</string>
+    <string name="all_fields_are_required">Attention, all fields are required. Please attach or take a picture and fill all forms fields</string>
     <string name="create_user">Register your account</string>
     <string name="hello_user">Hello,</string>
     <string name="hello_user_icon">Hello user icon</string>
@@ -47,8 +46,16 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="unable_to_delete">This document is already validated, unable to delete</string>
-    <string name="edit_document">Editar documento</string>
+    <string name="edit_document">Edit document</string>
     <string name="app_name_terms">Terms of Use</string>
     <string name="app_name_term">Terms of Use and Conditions</string>
     <string name="terms_info">By sign in you accept our Terms and Conditions</string>
+    <string name="label_prontuario">Prontuário</string>
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>

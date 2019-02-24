@@ -15,8 +15,10 @@ interface UserService {
     @POST(Constants.Api.API_URL + Constants.Endpoint.REGISTER)
     fun createUser(@Field("name") name: String,
                    @Field("email") email: String,
-                   @Field("password") password: String): Single<UserResponseEntity>
+                   @Field("password") password: String,
+                   @Field("role") role: String,
+                   @Field("prontuario") prontuario: String): Single<UserResponseEntity>
 
     @GET(Constants.Api.API_URL)
-    fun login() : Single<ResponseEntity>
+    fun login(): Single<ResponseEntity>
 }
