@@ -1,6 +1,7 @@
 package com.app.daniel.ifdoc.commons.base
 
 import android.Manifest.permission.*
+import android.view.MenuItem
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import com.app.daniel.ifdoc.commons.application.permissions.PermissionsHelper
@@ -8,7 +9,9 @@ import com.app.daniel.ifdoc.commons.application.permissions.PermissionsHelper
 
 abstract class BaseActivity : AppCompatActivity() {
 
-     fun checkPermissions() {
+    private lateinit var logout: MenuItem
+
+    fun checkPermissions() {
         PermissionsHelper().grant(this)
     }
 

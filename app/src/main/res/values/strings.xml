@@ -51,4 +51,8 @@
     <string name="app_name_terms">Terms of Use</string>
     <string name="app_name_term">Terms of Use and Conditions</string>
     <string name="terms_info">By sign in you accept our Terms and Conditions</string>
+    <string name="warning">Attention</string>
+    <string name="logout_warning">Are you sure you want to logout ?</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
 </resources>

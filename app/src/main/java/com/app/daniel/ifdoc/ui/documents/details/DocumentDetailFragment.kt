@@ -3,6 +3,7 @@ package com.app.daniel.ifdoc.ui.documents.details
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -39,6 +40,13 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
     override fun checkConnectionStatus(status: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val logout = menu.findItem(R.id.action_logout)
+        logout.isVisible = false
+    }
+
 
     override fun showRequestDialog(message: String) {
         dialog = ProgressDialog.show(context, getString(R.string.message_wait), message)

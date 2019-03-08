@@ -49,4 +49,9 @@
     <string name="app_name_terms">Termos de Uso</string>
     <string name="app_name_term">Termos de Uso e Condições</string>
     <string name="terms_info">Realizando login você está aceitando o nosso Termos e Condições</string>
+    <string name="edit_document">Editar documento</string>
+      <string name="warning">Atenção</string>
+    <string name="logout_warning">Deseja realmente finalizar sua sessão ?</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
 </resources>
