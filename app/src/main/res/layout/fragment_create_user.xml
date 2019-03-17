@@ -105,6 +105,41 @@
             app:layout_constraintTop_toBottomOf="@+id/label_email" />
 
         <TextView
+            android:id="@+id/label_prontuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/label_prontuario"
+            android:textColor="@color/color_app_blue"
+            android:textSize="@dimen/activity_text_label_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+
+        <EditText
+            android:id="@+id/userProntuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/color_app_blue"
+            android:ems="10"
+            android:gravity="center"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/color_app_blue"
+            android:textColorHint="@color/color_app_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_prontuario" />
+
+        <TextView
             android:id="@+id/label_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,7 +153,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/userProntuario" />
 
         <EditText
             android:id="@+id/userPassword"
@@ -138,6 +173,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_password" />
 
+
+
         <ImageView
             android:id="@+id/createUser"
             android:layout_width="@dimen/imagewiew_icon_default_width"
@@ -154,5 +191,6 @@
             app:layout_constraintTop_toBottomOf="@+id/userPassword"
             android:tint="@color/color_app_blue"
             app:srcCompat="@drawable/ic_done_24dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

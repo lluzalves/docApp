@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
@@ -38,7 +39,10 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         if (isTokenStored()) {
-            Navigation.findNavController(view).navigate(R.id.documentsFragment)
+            Navigation.findNavController(view)
+                    .navigate(R.id.documentsFragment, null,
+                            NavOptions.Builder().setPopUpTo(R.id.authFragment, true)
+                                    .build())
         } else {
             context?.let { checkNetwork(it) }
         }

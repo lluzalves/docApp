@@ -36,7 +36,7 @@ class DocumentsPresenter : BasePresenter<DocumentsMvpView>() {
                         mvpView?.dismissRequestDialog()
                         val hasNoDocuments = response.documents.isNullOrEmpty()
                         if (!hasNoDocuments) {
-                            storeDocuments(response.documents)
+                            deletePreviousFetchedData(response.documents)
                         } else {
                             mMvpView?.emptyDocuments()
                         }
@@ -76,6 +76,29 @@ class DocumentsPresenter : BasePresenter<DocumentsMvpView>() {
                         mvpView?.dismissRequestDialog()
                         mMvpView?.onError(throwable.localizedMessage)
                     }
+
+                })
+    }
+
+    fun deletePreviousFetchedData(documents: List<DocumentEntity>) {
+        DocumentRepository(App.appInstance)
+                .deleteAllDocuments()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SingleObserver<Int> {
+                    override fun onSuccess(result: Int) {
+                        storeDocuments(documents)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        mvpView?.dismissRequestDialog()
+                        mvpView?.onError(throwable.localizedMessage)
+                    }
+
 
                 })
     }

@@ -52,11 +52,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-     <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="parent">
 
@@ -64,6 +63,6 @@
             android:id="@+id/AllDocumentsRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,13 +19,13 @@ class RegisterPresenter : BasePresenter<MvpRegisterView>() {
     }
 
 
-    fun createAccount(name: String, email: String, password: String) {
-        var client = OkHttpFactory()
+    fun createAccount(name: String, email: String, password: String, prontuario: String) {
+        val client = OkHttpFactory()
                 .prepareClient()
         mMvpView?.showRequestDialog("Please wait")
         RetrofitFactory().setRetrofit(client)
                 .create(UserService::class.java)
-                .createUser(name, email, password)
+                .createUser(name, email, prontuario, "aluno", password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<UserResponseEntity> {

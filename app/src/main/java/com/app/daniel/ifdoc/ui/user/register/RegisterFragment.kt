@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.navigation.Navigation
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.input.FormTextWacther
@@ -31,11 +30,12 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createUser.setOnClickListener(this)
-        var textWatcher = FormTextWacther()
+        val textWatcher = FormTextWacther()
         userEmail.addTextChangedListener(textWatcher)
         userPassword.addTextChangedListener(textWatcher)
         userName.addTextChangedListener(textWatcher)
-        textWatcher.input(userEmail, userPassword, userName, createUser)
+        userProntuario.addTextChangedListener(textWatcher)
+        textWatcher.input(userEmail, userPassword, userName, createUser, userProntuario)
     }
 
     override fun checkConnectionStatus(isRegistered: Boolean) {
@@ -72,7 +72,7 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     override fun onClick(view: View) {
         when (view) {
             createUser -> {
-                if (userEmail.text.toString().isEmpty() || userPassword.text.toString().isEmpty() || userName.text.toString().isEmpty()) {
+                if (userEmail.text.toString().isEmpty() || userPassword.text.toString().isEmpty() || userName.text.toString().isEmpty() || userProntuario.text.toString().isEmpty()) {
                     view.let { Snackbar.make(it, getString(R.string.all_fields_are_required), Snackbar.LENGTH_LONG).show() }
                 } else {
                     val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -84,7 +84,7 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     }
 
     override fun singUp() {
-        presenter.createAccount(userName.text.toString(), userEmail.text.toString(), userPassword.text.toString())
+        presenter.createAccount(userName.text.toString(), userEmail.text.toString(), userPassword.text.toString(), userProntuario.text.toString())
     }
 
 }

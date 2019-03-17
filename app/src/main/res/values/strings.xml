@@ -55,4 +55,5 @@
     <string name="logout_warning">Are you sure you want to logout ?</string>
     <string name="ok">ok</string>
     <string name="cancel">cancel</string>
+    <string name="label_prontuario">Prontuário</string>
 </resources>

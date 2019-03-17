@@ -27,6 +27,12 @@ class DocumentRepository constructor(application: Application) {
         }
     }
 
+    fun deleteAllDocuments(): Single<Int> {
+        return Single.fromCallable{
+            dao?.deleteAllDocuments()
+        }
+    }
+
     fun insertDocuments(document: List<DocumentEntity>): Single<Array<Long>> {
         return Single.fromCallable {
             dao?.insertDocuments(document)
