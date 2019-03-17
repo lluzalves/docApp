@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -20,6 +21,7 @@ import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.commons.security.Base64Helper
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
+
 
 class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
 
@@ -34,6 +36,7 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         if (isTokenStored()) {
             Navigation.findNavController(view).navigate(R.id.documentsFragment)
         } else {
@@ -76,6 +79,13 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
             dialog.dismiss()
         }
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val logout = menu.findItem(R.id.action_logout)
+        logout.isVisible = false
+    }
+
 
     override fun showResponse(message: String) {
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }

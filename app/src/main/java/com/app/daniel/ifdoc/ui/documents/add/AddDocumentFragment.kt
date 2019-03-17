@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -136,6 +137,13 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         }
 
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val logout = menu.findItem(R.id.action_logout)
+        logout.isVisible = false
+    }
+
 
     private fun insertFromCamera(imageView: ImageView, absolutePath: String) {
         val bitmap = ImageDecoder().decodeSampleBitmapFromUri(absolutePath, 200, 200)

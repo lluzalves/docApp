@@ -60,10 +60,8 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
     override fun showDocuments(documents: List<Document>) {
         if (documents.isNullOrEmpty()) {
             emptyHome.isVisible = true
-            allDocumentsLayout.isVisible = false
         } else {
             emptyHome.isVisible = false
-            allDocumentsLayout.isVisible = true
             context?.let {
                 adapter = DocumentsAdapter(documents, it)
             }
