@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import com.afollestad.materialdialogs.MaterialDialog
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_document_details.*
 
 
@@ -60,14 +61,14 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
 
     override fun showDocument(document: Document) {
         description.text = document.description
-
         type.text = document.type
-
         isDocumentValidated(document.isValidated)
+        docDetailsView.isVisible = true
     }
 
     private fun isDocumentValidated(isValidated: String) {
         if (isValidated != "0") {
+            docEdit.setOnClickListener(null)
             docEdit.setTextColor(resources.getColor(R.color.material_grey_600))
             docDelete.setTextColor(resources.getColor(R.color.material_grey_600))
         }
@@ -75,7 +76,16 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
     }
 
     override fun showResponse(message: String) {
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
+        view?.let {           view?.context?.let {
+            MaterialDialog(it).icon(R.drawable.ic_done)
+                    .title(R.string.warning)
+                    .message(null, getString(R.string.document_deleted), false, 1F)
+                    .show {
+                        positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                    }.positiveButton {
+                        Navigation.findNavController(view!!).popBackStack()
+                    }
+        } }
     }
 
      override fun onClick(view: View?) {
@@ -89,7 +99,16 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
                 if (document.isValidated == "0") {
                     presenter.deleteDocument(document)
                 } else {
-                    onError(getString(R.string.unable_to_delete))
+                    view?.context?.let {
+                        MaterialDialog(it).icon(R.drawable.ic_warning_black)
+                                .title(R.string.unable_to_delete)
+                                .message(null, getString(R.string.unable_to_delete), false, 1F)
+                                .show {
+                                    positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                                }.positiveButton {
+                                    Navigation.findNavController(view!!).popBackStack()
+                                }
+                    }
                 }
             }
         }

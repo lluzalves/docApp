@@ -5,6 +5,8 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.view.isVisible
+import com.app.daniel.ifdoc.R
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
 
 class FormTextWacther : TextWatcher {
@@ -32,9 +34,9 @@ class FormTextWacther : TextWatcher {
 
     override fun afterTextChanged(s: Editable) {
         if (!EmailValidator().validateEmail(email.text.toString())) {
-            confirmAction.isVisible = false
+            email.error = email.context.getString(R.string.invalid_email)
         } else {
-            confirmAction.isVisible = password.text.isNotBlank() && name.text.isNotBlank() && userProntuario.text.isNotBlank()
+            email.error = null
         }
     }
 }

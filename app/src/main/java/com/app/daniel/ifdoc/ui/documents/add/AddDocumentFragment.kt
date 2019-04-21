@@ -19,6 +19,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import androidx.core.content.FileProvider
+import androidx.navigation.Navigation
+import com.afollestad.materialdialogs.MaterialDialog
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.input.image.ImageDecoder
@@ -80,11 +82,11 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
     override fun checkConnectionStatus(isRegistered: Boolean) {
         if (isRegistered) {
             var id = ""
-            if(document!=null){
-               id = document!!.id.toString()
+            if (document != null) {
+                id = document!!.id.toString()
             }
             activity?.contentResolver?.getType(savedPicture)?.let {
-                    presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type,id)
+                presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type, id)
             }
         } else {
             view?.let { Snackbar.make(it, getString(R.string.register_failure), Snackbar.LENGTH_LONG).show() }
@@ -110,7 +112,16 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
     }
 
     override fun showResponse(message: String) {
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
+        view?.let {
+            MaterialDialog(it.context).icon(R.drawable.ic_warning_black)
+                    .title(R.string.warning)
+                    .message(null, getString(R.string.failed_to_autenticated), false, 1F)
+                    .show {
+                        positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                    }.positiveButton {
+                        it.dismiss()
+                    }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -182,6 +193,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         }
     }
 
+
     override fun onNothingSelected(parent: AdapterView<*>?) {
 
     }
@@ -218,8 +230,16 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
         return result
     }
 
-    override fun showSuccessMessage(response: DocumentResponseEntity) {
-        view?.let { Snackbar.make(it, response.message, Snackbar.LENGTH_LONG).show() }
-        presenter.updateLocalDatabase(response.documents)
+    override fun showSuccessMessage() {
+        view?.let {
+            MaterialDialog(it.context).icon(R.drawable.ic_done)
+                    .title(R.string.warning)
+                    .message(null, getString(R.string.success_creating_document), false, 1F)
+                    .show {
+                        positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                    }.positiveButton {
+                        Navigation.findNavController(view!!).popBackStack()
+                    }
+        }
     }
 }

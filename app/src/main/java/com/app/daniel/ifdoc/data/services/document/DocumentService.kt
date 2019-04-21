@@ -18,7 +18,7 @@ interface DocumentService {
     @POST(Constants.Api.API_URL + Constants.Endpoint.DOCUMENTS)
     fun createDocument(@Part("description") description: RequestBody,
                        @Part file: MultipartBody.Part,
-                       @Part("type") documentType: RequestBody, @Part("id") documentId: RequestBody): Single<DocumentResponseEntity>
+                       @Part("type") documentType: RequestBody, @Part("id") documentId: RequestBody): Single<ResponseBody>
 
     @GET(Constants.Api.API_URL + Constants.Endpoint.DOCUMENTS + "/{document_id}")
     fun getDocument(@Path("document_id") documentId: Int): Single<DocumentResponseEntity>

@@ -1,196 +1,218 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_app_blue"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".ui.documents.add.AddDocumentFragment">
 
-    <TextView
-        android:id="@+id/create_user_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="@string/create_user"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/activity_text_label_size"
-        android:textStyle="bold"/>
-
     <ImageView
-        android:id="@+id/sign_up_avatar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_assignment_ind" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@color/color_app_blue" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:elevation="10dp"
-        android:background="@android:color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.documents.add.AddDocumentFragment">
 
         <TextView
-            android:id="@+id/label_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/label_name"
-            android:textColor="@color/color_app_blue"
-            android:textSize="@dimen/activity_text_label_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/userName"
+            android:id="@+id/create_user_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/color_app_blue"
-            android:ems="10"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:imeOptions="actionNext"
-            android:inputType="textPersonName"
-            android:textColor="@color/color_app_blue"
-            android:textColorHint="@color/color_app_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_name" />
-
-        <TextView
-            android:id="@+id/label_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/label_email"
-            android:textColor="@color/color_app_blue"
+            android:text="@string/create_user"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/activity_text_label_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userName" />
-
-        <EditText
-            android:id="@+id/userEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/color_app_blue"
-            android:ems="10"
-            android:gravity="center"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/color_app_blue"
-            android:textColorHint="@color/color_app_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_email" />
-
-        <TextView
-            android:id="@+id/label_prontuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/label_prontuario"
-            android:textColor="@color/color_app_blue"
-            android:textSize="@dimen/activity_text_label_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmail" />
-
-        <EditText
-            android:id="@+id/userProntuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/color_app_blue"
-            android:ems="10"
-            android:gravity="center"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:maxLength="10"
-            android:textColor="@color/color_app_blue"
-            android:textColorHint="@color/color_app_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_prontuario" />
-
-        <TextView
-            android:id="@+id/label_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/label_password"
-            android:textColor="@color/color_app_blue"
-            android:textSize="@dimen/activity_text_label_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userProntuario" />
-
-        <EditText
-            android:id="@+id/userPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/color_app_blue"
-            android:ems="10"
-            android:gravity="center"
-            android:imeOptions="actionNext"
-            android:inputType="textPassword"
-            android:textColor="@color/color_app_blue"
-            android:textColorHint="@color/color_app_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_password" />
-
-
+            android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/createUser"
-            android:layout_width="@dimen/imagewiew_icon_default_width"
-            android:layout_height="@dimen/imagewiew_icon_default_height"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userPassword"
-            android:tint="@color/color_app_blue"
-            app:srcCompat="@drawable/ic_done_24dp" />
+            android:id="@+id/sign_up_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_assignment_ind" />
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:backgroundTint="#00000000"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/label_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/label_name"
+                android:textColor="@color/color_app_blue"
+                android:textSize="@dimen/activity_text_label_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/color_app_blue"
+                android:ems="10"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:textColor="@color/color_app_blue"
+                android:textColorHint="@color/color_app_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_name" />
+
+            <TextView
+                android:id="@+id/label_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/label_email"
+                android:textColor="@color/color_app_blue"
+                android:textSize="@dimen/activity_text_label_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+            <EditText
+                android:id="@+id/userEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/color_app_blue"
+                android:ems="10"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/color_app_blue"
+                android:textColorHint="@color/color_app_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_email" />
+
+            <TextView
+                android:id="@+id/label_prontuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/label_prontuario"
+                android:textColor="@color/color_app_blue"
+                android:textSize="@dimen/activity_text_label_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+
+            <EditText
+                android:id="@+id/userProntuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/color_app_blue"
+                android:ems="10"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textColor="@color/color_app_blue"
+                android:textColorHint="@color/color_app_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_prontuario" />
+
+            <TextView
+                android:id="@+id/label_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/label_password"
+                android:textColor="@color/color_app_blue"
+                android:textSize="@dimen/activity_text_label_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userProntuario" />
+
+            <EditText
+                android:id="@+id/userPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/color_app_blue"
+                android:ems="10"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:textColor="@color/color_app_blue"
+                android:textColorHint="@color/color_app_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_password" />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/createUser"
+        android:layout_width="@dimen/imagewiew_icon_default_width"
+        android:layout_height="@dimen/imagewiew_icon_default_height"
+        android:layout_gravity="bottom|center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:focusable="true"
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userPassword"
+        app:srcCompat="@drawable/ic_done_24dp" />
+</FrameLayout>

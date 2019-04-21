@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name">ifDoc</string>
+    <string name="app_name">ifdocs</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_files">Add a new document</string>
     <string name="login_page">Login</string>
     <string name="if_doc_app">ifDoc App</string>
@@ -29,7 +28,9 @@
     <string name="choose_option_attachment">Please, choose the source</string>
     <string name="add_a_new_document">Add new document</string>
     <string name="fail_to_attach_image">Failure to attach image</string>
-    <string name="all_fields_are_required">Atention, all fields are required. Please attach or take a picture and fill all forms fields</string>
+    <string name="all_fields_are_required">Atention, all fields are required.</string>
+    <string name="all_fields_are_required_and_documents">Atention, all fields are required. Please attach or take a picture and fill all forms fields</string>
+
     <string name="create_user">Register your account</string>
     <string name="hello_user">Hello,</string>
     <string name="hello_user_icon">Hello user icon</string>
@@ -56,4 +57,10 @@
     <string name="ok">ok</string>
     <string name="cancel">cancel</string>
     <string name="label_prontuario">Prontuário</string>
+    <string name="invalid_email">Your email is invalid, please correct it</string>
+    <string name="failed_to_create_user">Failed to create your account. \n Reason: </string>
+    <string name="success_creating_user">Your account was created successfully, please login to start using the application</string>
+    <string name="failed_to_autenticated">Invalid credentials, please try again</string>
+    <string name="success_creating_document">Your document was successfully registered.</string>
+    <string name="document_deleted">Document successfully deleted</string>
 </resources>

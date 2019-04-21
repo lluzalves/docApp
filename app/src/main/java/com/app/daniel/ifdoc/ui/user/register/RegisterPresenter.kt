@@ -40,7 +40,7 @@ class RegisterPresenter : BasePresenter<MvpRegisterView>() {
 
                     override fun onError(e: Throwable) {
                         mMvpView?.dismissRequestDialog()
-                        mMvpView?.onError("Error : ".plus(e.localizedMessage))
+                        mMvpView?.onError(e.localizedMessage)
                     }
 
                 })
