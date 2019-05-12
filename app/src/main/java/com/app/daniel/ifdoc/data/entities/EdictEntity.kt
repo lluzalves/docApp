@@ -38,10 +38,6 @@ data class EdictEntity(
         @SerializedName(Field.TYPE)
         val type: String,
 
-        @ColumnInfo(name = "is_available")
-        @SerializedName(Field.IS_AVAILABLE)
-        val isAvailable: String,
-
         @ColumnInfo(name = "starts_at")
         @SerializedName(Field.STARTS_AT)
         val startsAt: String,
@@ -56,7 +52,7 @@ data class EdictEntity(
 ) : BaseEntity {
 
     companion object {
-        const val NAME = "edict"
+        const val NAME = "edicts"
 
         object Field {
             const val ID = "id"
@@ -68,7 +64,6 @@ data class EdictEntity(
             const val STARTS_AT = "starts_at"
             const val ENDS_AT = "end_at"
             const val NOTIFICATION = "notification"
-            const val IS_AVAILABLE = "isAvailable"
             const val TYPE = "type"
         }
     }

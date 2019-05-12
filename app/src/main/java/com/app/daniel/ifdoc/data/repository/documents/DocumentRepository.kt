@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.domain.repository.documents
+package com.app.daniel.ifdoc.data.repository.documents
 
 import android.app.Application
 import com.app.daniel.ifdoc.data.dao.DocsRoomDatabase

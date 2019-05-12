@@ -11,6 +11,7 @@ data class UserEntity(
         @PrimaryKey
         @NonNull
         @ColumnInfo(name = "id")
+        @SerializedName(Field.ID)
         override var id: Int,
 
         @ColumnInfo(name = "created_at")
@@ -19,31 +20,24 @@ data class UserEntity(
         @ColumnInfo(name = "updated_at")
         override var updated_at: String,
 
-        @ColumnInfo(name = "name")
+         @ColumnInfo(name = "name")
         @SerializedName(Field.NAME)
         val name: String,
 
         @ColumnInfo(name = "user_email")
         @SerializedName(Field.EMAIL)
-        val email: String,
-
-        @ColumnInfo(name = "user_token")
-        @SerializedName(Field.TOKEN)
-        val token: String,
-
-        @ColumnInfo(name = "toke_expiration_date")
-        @SerializedName(Field.TOKEN_EXPIRATION)
-        val tokenExpirationDate: String
+        val email: String
 ) : BaseEntity, JsonConvertable {
 
     companion object {
-        const val NAME = "users"
+        const val NAME = "user"
 
         object Field {
             const val ID = "id"
             const val NAME = "name"
             const val EMAIL = "email"
             const val TOKEN = "token"
+            const val PASSWORD = "password"
             const val TOKEN_EXPIRATION = "token_expiration"
         }
     }

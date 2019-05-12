@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.domain.repository.edict
+package com.app.daniel.ifdoc.data.repository.edict
 
 import com.app.daniel.ifdoc.data.entities.EdictEntity
 import com.app.daniel.ifdoc.domain.model.Edict
@@ -13,6 +13,5 @@ internal fun EdictEntity.toEdict() = Edict(
         description = this.description,
         notification = this.notification,
         type = this.type,
-        is_available = this.isAvailable,
         roles = this.roles
 )

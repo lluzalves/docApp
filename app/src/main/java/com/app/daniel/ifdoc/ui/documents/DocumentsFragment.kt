@@ -12,6 +12,7 @@ import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.Token
 import com.app.daniel.ifdoc.commons.view.DivisorItens
 import com.app.daniel.ifdoc.domain.model.Document
+import com.app.daniel.ifdoc.domain.model.Edict
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -19,6 +20,7 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
 
     private lateinit var dialog: ProgressDialog
     private lateinit var adapter: DocumentsAdapter
+    private lateinit var edict :Edict
     private var presenter = DocumentsPresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +31,11 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.requestUserDocuments(Token.getToken())
         createDocument.setOnClickListener(this)
+        if(arguments!=null){
+            edict = arguments?.getSerializable("edict") as Edict
+            presenter.requestUserDocuments(Token.getToken(),edict.id)
+        }
 
     }
 

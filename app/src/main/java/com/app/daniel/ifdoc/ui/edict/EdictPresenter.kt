@@ -6,9 +6,9 @@ import com.app.daniel.ifdoc.commons.network.OkHttpFactory
 import com.app.daniel.ifdoc.commons.network.RetrofitFactory
 import com.app.daniel.ifdoc.data.entities.EdictEntity
 import com.app.daniel.ifdoc.data.entities.responses.EdictResponseEntity
+import com.app.daniel.ifdoc.data.repository.edict.EdictRepository
 import com.app.daniel.ifdoc.data.services.edict.EdictService
 import com.app.daniel.ifdoc.domain.model.Edict
-import com.app.daniel.ifdoc.domain.repository.edict.EdictRepository
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -21,7 +21,7 @@ class EdictPresenter : BasePresenter<EdictMvpView>() {
     }
 
 
-    fun requestEdictsForUser(userId: String, token:String){
+    fun requestEdictsForUser(token:String){
 
         val client = OkHttpFactory()
                 .prepareClientWithToken(token)
@@ -33,10 +33,10 @@ class EdictPresenter : BasePresenter<EdictMvpView>() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<EdictResponseEntity> {
                     override fun onSuccess(response: EdictResponseEntity) {
-                        mvpView?.dismissRequestDialog()
-                        val hasNoEdict = response.documents.isNullOrEmpty()
+                        mvpView?.showRequestDialog("Please wait")
+                        val hasNoEdict = response.edicts.isNullOrEmpty()
                         if (!hasNoEdict) {
-                            storeEdicts(response.documents)
+                            storeEdicts(response.edicts)
                         } else {
                             mMvpView?.noEdictAvailable()
                         }
@@ -54,15 +54,13 @@ class EdictPresenter : BasePresenter<EdictMvpView>() {
                 })
     }
 
-    private fun storeEdicts(edict: List<EdictEntity>) {
-        mvpView?.showRequestDialog("Fetching data")
+    private fun storeEdicts(edicts: List<EdictEntity>) {
         EdictRepository(App.appInstance)
-                .insertEdicts(edict)
+                .insertEdicts(edicts)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Array<Long>> {
                     override fun onSuccess(databaseResponse: Array<Long>) {
-                        mvpView?.dismissRequestDialog()
                         if (databaseResponse[0] > -1) {
                             retrieveFetchedEdicts()
                         }
@@ -81,14 +79,13 @@ class EdictPresenter : BasePresenter<EdictMvpView>() {
     }
 
     fun retrieveFetchedEdicts() {
-        mvpView?.showRequestDialog("Loading")
         EdictRepository(App.appInstance).allEdicts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<List<Edict>?> {
                     override fun onSuccess(edicts: List<Edict>) {
-                        mvpView?.dismissRequestDialog()
                         mvpView?.showEdicts(edicts = edicts)
+                        mvpView?.dismissRequestDialog()
                     }
 
                     override fun onSubscribe(disposable: Disposable) {

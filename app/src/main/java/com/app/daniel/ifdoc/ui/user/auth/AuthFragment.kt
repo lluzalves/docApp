@@ -41,7 +41,7 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         navController = Navigation.findNavController(view)
         if (isTokenStored()) {
             Navigation.findNavController(view)
-                    .navigate(R.id.documentsFragment, null,
+                    .navigate(R.id.edictFragment, null,
                             NavOptions.Builder().setPopUpTo(R.id.authFragment, true)
                                     .build())
         } else {
@@ -109,6 +109,13 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val editor: SharedPreferences.Editor = preferences.edit()
         editor.putString(Base64Helper().encrypt("token"), Base64Helper().encrypt(token))
+        editor.apply()
+    }
+
+    override fun storeUserId(userId: Int) {
+        val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor: SharedPreferences.Editor = preferences.edit()
+        editor.putInt("userId", userId)
         editor.apply()
     }
 

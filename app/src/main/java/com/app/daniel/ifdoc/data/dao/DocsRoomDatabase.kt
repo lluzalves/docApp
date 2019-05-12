@@ -13,6 +13,7 @@ abstract class DocsRoomDatabase : RoomDatabase() {
 
     abstract val documentsDao : DocumentDao
     abstract val edictDao : EdictDao
+    abstract val userDao : UserDao
 
     companion object {
         var INSTANCE: DocsRoomDatabase? = null

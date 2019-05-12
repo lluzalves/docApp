@@ -1,6 +1,5 @@
 package com.app.daniel.ifdoc.ui.documents.details
 
-import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.application.App
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
@@ -11,8 +10,8 @@ import com.app.daniel.ifdoc.data.entities.responses.BaseResponseEntity
 import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.services.document.DocumentService
 import com.app.daniel.ifdoc.domain.model.Document
-import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
-import com.app.daniel.ifdoc.domain.repository.documents.toDocument
+import com.app.daniel.ifdoc.data.repository.documents.DocumentRepository
+import com.app.daniel.ifdoc.data.repository.documents.toDocument
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

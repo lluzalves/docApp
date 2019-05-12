@@ -6,5 +6,6 @@ interface MvpAuthView : MvpView{
 
     fun showLogin(isInternetAvailable : Boolean)
     fun storeToken(token: String)
+    fun storeUserId(userId: Int)
     fun showRecoverPassword()
 }

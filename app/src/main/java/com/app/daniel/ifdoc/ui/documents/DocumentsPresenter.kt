@@ -8,7 +8,7 @@ import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.services.document.DocumentService
 import com.app.daniel.ifdoc.domain.model.Document
-import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
+import com.app.daniel.ifdoc.data.repository.documents.DocumentRepository
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -20,7 +20,7 @@ class DocumentsPresenter : BasePresenter<DocumentsMvpView>() {
         mMvpView = documentDetailMvpView
     }
 
-    fun requestUserDocuments(token: String) {
+    fun requestUserDocuments(token: String, edictId: Int) {
         mvpView?.showRequestDialog("Please wait")
 
         val client = OkHttpFactory()
@@ -28,7 +28,7 @@ class DocumentsPresenter : BasePresenter<DocumentsMvpView>() {
 
         RetrofitFactory().setRetrofit(client)
                 .create(DocumentService::class.java)
-                .myDocuments()
+                .myDocuments(edictId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<DocumentResponseEntity> {

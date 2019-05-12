@@ -7,14 +7,17 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/edictCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         android:elevation="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardEdict"
             android:layout_width="match_parent"
             android:padding="10dp"
+            android:background="@color/color_app_blue"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -38,7 +41,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/edict_name"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -50,7 +53,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textStyle="normal"
                 android:fontFamily="sans-serif"
                 android:text="@string/available_until"

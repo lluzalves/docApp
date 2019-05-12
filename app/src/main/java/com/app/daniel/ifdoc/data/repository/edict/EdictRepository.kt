@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.domain.repository.edict
+package com.app.daniel.ifdoc.data.repository.edict
 
 import android.app.Application
 import com.app.daniel.ifdoc.data.dao.DocsRoomDatabase

@@ -1,13 +1,11 @@
 package com.app.daniel.ifdoc.data.services.user
 
 import com.app.daniel.ifdoc.commons.api.Constants
+import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.entities.responses.ResponseEntity
 import com.app.daniel.ifdoc.data.entities.responses.UserResponseEntity
 import io.reactivex.Single
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface UserService {
 
@@ -21,4 +19,7 @@ interface UserService {
 
     @GET(Constants.Api.API_URL)
     fun login() : Single<ResponseEntity>
+
+    @GET(Constants.Api.API_URL +"user"+"/{email}" )
+    fun getCurrentUserInfo(@Path("email") email: String): Single<UserResponseEntity>
 }

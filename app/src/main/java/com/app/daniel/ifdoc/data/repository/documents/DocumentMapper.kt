@@ -1,4 +1,4 @@
-package com.app.daniel.ifdoc.domain.repository.documents
+package com.app.daniel.ifdoc.data.repository.documents
 
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document

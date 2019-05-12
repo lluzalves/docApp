@@ -1,7 +1,7 @@
 package com.app.daniel.ifdoc.domain.usecases
 
 import com.app.daniel.ifdoc.domain.model.Document
-import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
+import com.app.daniel.ifdoc.data.repository.documents.DocumentRepository
 import io.reactivex.Single
 
 

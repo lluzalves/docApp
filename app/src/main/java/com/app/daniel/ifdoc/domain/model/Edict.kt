@@ -1,5 +1,7 @@
 package com.app.daniel.ifdoc.domain.model
 
+import java.io.Serializable
+
 data class Edict(
         override var id: Int,
         override var created_at: String,
@@ -10,6 +12,5 @@ data class Edict(
         var type: String,
         var end_at: String,
         var roles: String,
-        var is_available: String,
         var notification: String
-) : BaseModel
+) : BaseModel, Serializable

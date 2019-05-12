@@ -4,15 +4,16 @@ import com.app.daniel.ifdoc.commons.api.Constants
 import com.app.daniel.ifdoc.data.entities.responses.BaseResponseEntity
 import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import io.reactivex.Single
-import okhttp3.*
-import retrofit2.Call
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 
 interface DocumentService {
 
-    @GET(Constants.Api.API_URL + Constants.Endpoint.DOCUMENTS)
-    fun myDocuments(): Single<DocumentResponseEntity>
+    @GET(Constants.Api.API_URL + Constants.Endpoint.DOCUMENTS + "/all/{edict_id}")
+    fun myDocuments(@Path("edict_id") edictId: Int): Single<DocumentResponseEntity>
 
     @Multipart
     @POST(Constants.Api.API_URL + Constants.Endpoint.DOCUMENTS)

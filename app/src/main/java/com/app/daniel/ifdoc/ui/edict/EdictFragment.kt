@@ -7,26 +7,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.Token
+import com.app.daniel.ifdoc.commons.view.DivisorItens
 import com.app.daniel.ifdoc.domain.model.Edict
 import kotlinx.android.synthetic.main.fragment_edict.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class EdictFragment : BaseFragment(), EdictMvpView {
     private lateinit var dialog: ProgressDialog
     private var presenter = EdictPresenter()
+    private lateinit var adapter : EdictAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        presenter.attachView(this)
         return inflater.inflate(R.layout.fragment_edict, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // presenter.requestEdictsForUser(Token.getToken())
+        presenter.requestEdictsForUser(Token.getToken())
     }
 
     override fun checkConnectionStatus(status: Boolean) {
@@ -39,9 +42,7 @@ class EdictFragment : BaseFragment(), EdictMvpView {
     }
 
     override fun dismissRequestDialog() {
-        if (dialog != null && dialog.isShowing) {
             dialog.dismiss()
-        }
     }
 
     override fun showResponse(message: String) {
@@ -49,7 +50,21 @@ class EdictFragment : BaseFragment(), EdictMvpView {
     }
 
     override fun showEdicts(edicts: List<Edict>) {
+        dismissRequestDialog()
         updateUi(isEmpty = false)
+        if (edicts.isNullOrEmpty()) {
+            noEdictAvailable()
+        } else {
+            updateUi(false)
+            context?.let {
+                adapter = EdictAdapter(edicts, it)
+                val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                AllEdicts.layoutManager = staggeredGridLayoutManager
+                context?.let { DivisorItens(it) }?.let { AllEdicts.addItemDecoration(it) }
+                registerForContextMenu(AllEdicts)
+                AllEdicts.adapter = adapter
+            }
+        }
     }
 
     override fun noEdictAvailable() {

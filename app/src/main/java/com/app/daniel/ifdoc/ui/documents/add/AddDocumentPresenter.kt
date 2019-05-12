@@ -2,15 +2,10 @@ package com.app.daniel.ifdoc.ui.documents.add
 
 
 import android.os.Environment
-import com.app.daniel.ifdoc.R
-import com.app.daniel.ifdoc.commons.application.App
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
 import com.app.daniel.ifdoc.commons.network.RetrofitFactory
-import com.app.daniel.ifdoc.data.entities.DocumentEntity
-import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.data.services.document.DocumentService
-import com.app.daniel.ifdoc.domain.repository.documents.DocumentRepository
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
