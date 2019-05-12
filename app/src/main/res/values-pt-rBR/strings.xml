@@ -69,5 +69,8 @@
     <string name="success_creating_user">Sua conta foi criada com sucesso ! Faça o login para começar a usar a aplicação.</string>
     <string name="success_creating_document">Seu documento foi registrado com sucesso.</string>
     <string name="document_deleted">Documento deletado com sucesso.</string>
+    <string name="available_until">Disponível até :  %s</string>
+    <string name="edict_name">Edital : %s</string>
+    <string name="no_edicts_available">Nenhum edital disponível por enquanto, tente mais tarde!</string>
 
 </resources>

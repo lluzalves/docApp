@@ -5,12 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
+import com.app.daniel.ifdoc.data.entities.EdictEntity
 import com.app.daniel.ifdoc.data.entities.UserEntity
 
-@Database(entities = [UserEntity::class, DocumentEntity::class], version = 1)
+@Database(entities = [UserEntity::class, DocumentEntity::class, EdictEntity::class], version = 1)
 abstract class DocsRoomDatabase : RoomDatabase() {
 
     abstract val documentsDao : DocumentDao
+    abstract val edictDao : EdictDao
 
     companion object {
         var INSTANCE: DocsRoomDatabase? = null

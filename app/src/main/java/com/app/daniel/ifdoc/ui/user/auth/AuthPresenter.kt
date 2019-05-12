@@ -1,7 +1,6 @@
 package com.app.daniel.ifdoc.ui.user.auth
 
 
-import androidx.navigation.Navigation
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BasePresenter
 import com.app.daniel.ifdoc.commons.network.OkHttpFactory
@@ -48,4 +47,5 @@ class AuthPresenter : BasePresenter<MvpAuthView>() {
 
                 })
     }
+
 }

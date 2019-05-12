@@ -45,15 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.NavActivity"
-            android:label="@string/title_activity_nav"
-            android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.app.daniel.ifdoc.ui.MainActivity" />
-        </activity>
     </application>
 
 </manifest>

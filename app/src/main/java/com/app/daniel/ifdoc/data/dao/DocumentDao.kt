@@ -6,8 +6,11 @@ import com.app.daniel.ifdoc.data.entities.DocumentEntity
 @Dao
 interface DocumentDao {
 
-    @Query("select * from " + DocumentEntity.NAME)
+    @Query("select * from " + DocumentEntity.NAME )
     fun allDocuments(): List<DocumentEntity>
+
+    @Query("SELECT * FROM documents WHERE edict_id = :edictId")
+    fun allEdictDocuments(edictId: String) : List<DocumentEntity>
 
     @Update
     fun updateDocument(documentEntity: DocumentEntity): Int

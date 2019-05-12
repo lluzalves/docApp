@@ -6,8 +6,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = DocumentEntity.NAME)
-data class DocumentEntity(
+@Entity(tableName = EdictEntity.NAME)
+data class EdictEntity(
         @PrimaryKey
         @NonNull
         @ColumnInfo(name = "id")
@@ -22,9 +22,13 @@ data class DocumentEntity(
         @SerializedName(Field.UPDATED_AT)
         override var updated_at: String,
 
-        @ColumnInfo(name = "user_id")
-        @SerializedName(Field.USER_ID)
-        val userId: Int,
+        @ColumnInfo(name = "roles")
+        @SerializedName(Field.ROLES)
+        val roles: String,
+
+        @ColumnInfo(name = "title")
+        @SerializedName(Field.TITLE)
+        val title: String,
 
         @ColumnInfo(name = "description")
         @SerializedName(Field.DESCRIPTION)
@@ -34,34 +38,37 @@ data class DocumentEntity(
         @SerializedName(Field.TYPE)
         val type: String,
 
-        @ColumnInfo(name = "isValidated")
-        @SerializedName(Field.IS_VALIDATED)
-        val isValidated: String,
+        @ColumnInfo(name = "is_available")
+        @SerializedName(Field.IS_AVAILABLE)
+        val isAvailable: String,
+
+        @ColumnInfo(name = "starts_at")
+        @SerializedName(Field.STARTS_AT)
+        val startsAt: String,
+
+        @ColumnInfo(name = "end_at")
+        @SerializedName(Field.ENDS_AT)
+        val endAt: String,
 
         @ColumnInfo(name = "notification")
         @SerializedName(Field.NOTIFICATION)
-        val notification: String,
-
-        @ColumnInfo(name = "edict_id")
-        @SerializedName(Field.EDICT_ID)
-        val edictId: String
-
-
+        val notification: String
 ) : BaseEntity {
 
     companion object {
-        const val NAME = "documents"
+        const val NAME = "edict"
 
         object Field {
             const val ID = "id"
-            const val USER_ID = "user_id"
+            const val ROLES = "roles"
             const val DESCRIPTION = "description"
-            const val FILE_URL = "file_url"
-            const val EDICT_ID = "edict_id"
+            const val TITLE = "title"
             const val CREATED_AT = "created_at"
             const val UPDATED_AT = "updated_at"
+            const val STARTS_AT = "starts_at"
+            const val ENDS_AT = "end_at"
             const val NOTIFICATION = "notification"
-            const val IS_VALIDATED = "is_validated"
+            const val IS_AVAILABLE = "isAvailable"
             const val TYPE = "type"
         }
     }

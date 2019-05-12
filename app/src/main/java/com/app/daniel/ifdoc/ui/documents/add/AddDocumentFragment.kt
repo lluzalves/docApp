@@ -27,7 +27,6 @@ import com.app.daniel.ifdoc.commons.input.image.ImageDecoder
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
 import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
-import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 import com.app.daniel.ifdoc.domain.model.Document
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import com.google.android.material.snackbar.Snackbar
