@@ -28,6 +28,7 @@ import com.app.daniel.ifdoc.commons.network.NetworkChecker
 import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
+import com.app.daniel.ifdoc.domain.model.Edict
 import com.app.daniel.ifdoc.ui.user.register.MvpAddDocumentView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_create_document.*
@@ -42,6 +43,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
     private lateinit var attachmentDialog: Dialog
     private lateinit var type: String
     private var document: Document? = null
+    private var edict: Edict? = null
     private var presenter = AddDocumentPresenter()
     private val cameraRequest = 1888
     private val attachmentRequest = 1887
@@ -58,17 +60,19 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (this.arguments != null) {
-            val bundle: Bundle = this.arguments!!
-            document = bundle.getSerializable(DocumentEntity.NAME) as Document
+            edict = arguments?.getSerializable("edict") as Edict
+            if (arguments?.getSerializable(DocumentEntity.NAME) != null) {
+                document = arguments?.getSerializable(DocumentEntity.NAME) as Document
+            }
             if (document != null) {
                 labelDocument.text = getString(R.string.edit_document)
                 docDescription.setText(document!!.description)
             }
+            sendDocument.setOnClickListener(this)
+            takePicture.setOnClickListener(this)
+            folder = presenter.setFolder()
+            setSpinnerData()
         }
-        sendDocument.setOnClickListener(this)
-        takePicture.setOnClickListener(this)
-        folder = presenter.setFolder()
-        setSpinnerData()
     }
 
     private fun setSpinnerData() {
@@ -85,7 +89,7 @@ class AddDocumentFragment : BaseFragment(), MvpAddDocumentView, View.OnClickList
                 id = document!!.id.toString()
             }
             activity?.contentResolver?.getType(savedPicture)?.let {
-                presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type, id)
+                edict?.id?.let { edictId -> presenter.createDocument(getToken(), docDescription.text.toString(), pictureFile, it, type, id, edictId) }
             }
         } else {
             view?.let { Snackbar.make(it, getString(R.string.register_failure), Snackbar.LENGTH_LONG).show() }

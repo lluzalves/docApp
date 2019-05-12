@@ -22,11 +22,12 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
     }
 
 
-    fun createDocument(token: String, description: String, file: File, type: String, docType: String, id: String) {
+    fun createDocument(token: String, description: String, file: File, type: String, docType: String, id: String, edictId: Int) {
         mvpView?.showRequestDialog("Please wait")
         val documentDescription = RequestBody.create(MediaType.parse("text/plain"), description)
         val documentType = RequestBody.create(MediaType.parse("text/plain"), docType)
         val documentId = RequestBody.create(MediaType.parse("text/plain"), id)
+        val edict = RequestBody.create(MediaType.parse("text/plain"), edictId.toString())
         val userFile = RequestBody.create(MediaType.parse(type), file)
         val filePart = MultipartBody.Part.createFormData("file", file.name, userFile)
         val client = OkHttpFactory()
@@ -34,7 +35,7 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
 
         RetrofitFactory().setRetrofit(client)
                 .create(DocumentService::class.java)
-                .createDocument(documentDescription, filePart, documentType, documentId)
+                .createDocument(documentDescription, filePart, documentType, documentId, edict)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<ResponseBody> {

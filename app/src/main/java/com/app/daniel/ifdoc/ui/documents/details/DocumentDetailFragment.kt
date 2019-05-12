@@ -14,6 +14,7 @@ import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.Token.getToken
 import com.app.daniel.ifdoc.data.entities.DocumentEntity
 import com.app.daniel.ifdoc.domain.model.Document
+import com.app.daniel.ifdoc.domain.model.Edict
 import kotlinx.android.synthetic.main.fragment_document_details.*
 
 
@@ -21,12 +22,14 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
 
     private lateinit var dialog: ProgressDialog
     private lateinit var document: Document
+    private lateinit var edict: Edict
     private var presenter = DocumentDetailPresenter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         presenter.attachView(this)
         val bundle: Bundle = this.arguments!!
+        edict = arguments?.getSerializable("edict") as Edict
         document = bundle.getSerializable(DocumentEntity.NAME) as Document
         return inflater.inflate(R.layout.fragment_document_details, container, false)
     }
@@ -76,24 +79,27 @@ class DocumentDetailFragment : BaseFragment(), DocumentDetailMvpView, View.OnCli
     }
 
     override fun showResponse(message: String) {
-        view?.let {           view?.context?.let {
-            MaterialDialog(it).icon(R.drawable.ic_done)
-                    .title(R.string.warning)
-                    .message(null, getString(R.string.document_deleted), false, 1F)
-                    .show {
-                        positiveButton(R.string.ok, click = MaterialDialog::dismiss)
-                    }.positiveButton {
-                        Navigation.findNavController(view!!).popBackStack()
-                    }
-        } }
+        view?.let {
+            view?.context?.let {
+                MaterialDialog(it).icon(R.drawable.ic_done)
+                        .title(R.string.warning)
+                        .message(null, getString(R.string.document_deleted), false, 1F)
+                        .show {
+                            positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                        }.positiveButton {
+                            Navigation.findNavController(view!!).popBackStack()
+                        }
+            }
+        }
     }
 
-     override fun onClick(view: View?) {
+    override fun onClick(view: View?) {
         when (view) {
             docEdit -> {
                 val bundle = Bundle()
                 bundle.putSerializable(DocumentEntity.NAME, document)
-                view?.let { Navigation.findNavController(it).navigate(R.id.addDocumentFragment, bundle) }
+                bundle.putSerializable("edict",edict)
+                view?.let { Navigation.findNavController(it).navigate(R.id.action_documentDetailFragment_to_addDocumentFragment, bundle) }
             }
             docDelete -> {
                 if (document.isValidated == "0") {

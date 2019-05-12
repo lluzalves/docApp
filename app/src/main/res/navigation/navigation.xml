@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_documentDetailFragment_to_documentsFragment"
             app:destination="@id/documentsFragment" />
+        <action
+            android:id="@+id/action_documentDetailFragment_to_addDocumentFragment"
+            app:destination="@id/addDocumentFragment" />
     </fragment>
     <fragment
         android:id="@+id/addDocumentFragment"

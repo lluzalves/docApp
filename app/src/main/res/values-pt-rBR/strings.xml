@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ifdocs</string>
+    <string name="app_name">pae docs</string>
     <string name="select_files">Adicionar documento</string>
     <string name="login_page">Entrar</string>
     <string name="if_doc_app">ifDoc App</string>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
@@ -68,7 +69,7 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
         } else {
             emptyHome.isVisible = false
             context?.let {
-                adapter = DocumentsAdapter(documents, it)
+                adapter = DocumentsAdapter(documents, it,edict)
                 val staggeredGridLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
                 AllDocumentsRecycler.layoutManager = staggeredGridLayoutManager
                 context?.let { DivisorItens(it) }?.let { AllDocumentsRecycler.addItemDecoration(it) }
@@ -90,7 +91,9 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
         override fun onClick(view: View?) {
             when (view) {
                 createDocument -> {
-                    nextScreen(R.id.addDocumentFragment)
+                    val bundle = Bundle()
+                    bundle.putSerializable("edict",edict)
+                    view?.let { Navigation.findNavController(it).navigate(R.id.action_documentsFragment_to_addDocumentFragment, bundle) }
                 }
             }
         }
