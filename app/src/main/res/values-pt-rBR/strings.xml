@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ifDoc</string>
+    <string name="app_name">ifdocs</string>
     <string name="select_files">Adicionar documento</string>
     <string name="login_page">Entrar</string>
     <string name="if_doc_app">ifDoc App</string>
@@ -28,7 +28,15 @@
     <string name="choose_option_attachment">Por favor, escolha uma opção</string>
     <string name="add_a_new_document">Adicionar novo documento</string>
     <string name="fail_to_attach_image">Falha ao anexar arquivo</string>
-    <string name="all_fields_are_required">Atenção, todos os campos devem ser preenchidos e documento deve está anexado</string>
+    <string name="all_fields_are_required">Atenção, todos os campos devem ser preenchidos</string>
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="invalid_email">O seu email é inválido, por favor corriga</string>
     <string name="create_user">Registrar sua conta</string>
     <string name="hello_user">Olá,</string>
     <string name="hello_user_icon">OLá user icon</string>
@@ -52,6 +60,14 @@
     <string name="terms_info">Realizando login você está aceitando o nosso Termos e Condições</string>
       <string name="warning">Atenção</string>
     <string name="logout_warning">Deseja realmente finalizar sua sessão ?</string>
+    <string name="failed_to_create_user">Falha ao criar uma nova conta. \n Motivo : </string>
     <string name="ok">ok</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">cancelar</string>
+    <string name="all_fields_are_required_and_documents">Atenção, todos os campos devem ser preenchidos e documento deve está anexado</string>
+    <string name="label_prontuario">Prontuário</string>
+    <string name="failed_to_autenticated">Credenciais invalidas, por favor tente novamente</string>
+    <string name="success_creating_user">Sua conta foi criada com sucesso ! Faça o login para começar a usar a aplicação.</string>
+    <string name="success_creating_document">Seu documento foi registrado com sucesso.</string>
+    <string name="document_deleted">Documento deletado com sucesso.</string>
+
 </resources>

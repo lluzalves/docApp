@@ -16,9 +16,7 @@ import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.*
 import java.io.File
 
 
@@ -41,13 +39,13 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
 
         RetrofitFactory().setRetrofit(client)
                 .create(DocumentService::class.java)
-                .createDocument(documentDescription, filePart, documentType,documentId)
+                .createDocument(documentDescription, filePart, documentType, documentId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<DocumentResponseEntity> {
-                    override fun onSuccess(response: DocumentResponseEntity) {
+                .subscribe(object : SingleObserver<ResponseBody> {
+                    override fun onSuccess(response: ResponseBody) {
                         mvpView?.dismissRequestDialog()
-                        mMvpView?.showSuccessMessage(response)
+                        mMvpView?.showSuccessMessage()
                     }
 
                     override fun onSubscribe(d: Disposable) {
@@ -66,29 +64,6 @@ class AddDocumentPresenter : BasePresenter<MvpAddDocumentView>() {
         val folder = File(Environment.getExternalStorageDirectory(), "ifdocs/")
         folder.mkdirs()
         return folder
-    }
-
-    fun updateLocalDatabase(documents: List<DocumentEntity>) {
-        DocumentRepository(App.appInstance)
-                .insertDocuments(documents)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<Array<Long>> {
-                    override fun onSuccess(databaseResponse: Array<Long>) {
-                        mvpView?.dismissRequestDialog()
-                        mvpView?.nextScreen(R.id.documentsFragment)
-                    }
-
-                    override fun onSubscribe(disposable: Disposable) {
-
-                    }
-
-                    override fun onError(throwable: Throwable) {
-                        mvpView?.dismissRequestDialog()
-                        mvpView?.onError(throwable.localizedMessage)
-                    }
-
-                })
     }
 
 }

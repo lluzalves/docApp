@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.afollestad.materialdialogs.MaterialDialog
+import com.app.daniel.ifdoc.R
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -18,7 +20,6 @@ abstract class BaseFragment : Fragment(), MvpView {
     }
 
     override fun onError(message: String) {
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
     }
 
     override fun nextScreen(flowIntention: Int) {

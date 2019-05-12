@@ -19,13 +19,13 @@ class RegisterPresenter : BasePresenter<MvpRegisterView>() {
     }
 
 
-    fun createAccount(name: String, email: String, password: String, prontuario : String) {
-        var client = OkHttpFactory()
+    fun createAccount(name: String, email: String, password: String, prontuario: String) {
+        val client = OkHttpFactory()
                 .prepareClient()
         mMvpView?.showRequestDialog("Please wait")
         RetrofitFactory().setRetrofit(client)
                 .create(UserService::class.java)
-                .createUser(name, email, password, "aluno",prontuario)
+                .createUser(name, email, prontuario, "aluno", password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<UserResponseEntity> {
@@ -40,7 +40,7 @@ class RegisterPresenter : BasePresenter<MvpRegisterView>() {
 
                     override fun onError(e: Throwable) {
                         mMvpView?.dismissRequestDialog()
-                        mMvpView?.onError("Error : ".plus(e.localizedMessage))
+                        mMvpView?.onError(e.localizedMessage)
                     }
 
                 })

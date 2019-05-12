@@ -13,7 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import com.afollestad.materialdialogs.MaterialDialog
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
@@ -38,7 +40,10 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         if (isTokenStored()) {
-            Navigation.findNavController(view).navigate(R.id.documentsFragment)
+            Navigation.findNavController(view)
+                    .navigate(R.id.documentsFragment, null,
+                            NavOptions.Builder().setPopUpTo(R.id.authFragment, true)
+                                    .build())
         } else {
             context?.let { checkNetwork(it) }
         }
@@ -88,7 +93,16 @@ class AuthFragment : BaseFragment(), MvpAuthView, View.OnClickListener {
 
 
     override fun showResponse(message: String) {
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
+        view?.let { it ->
+            MaterialDialog(it.context).icon(R.drawable.ic_warning_black)
+                    .title(R.string.warning)
+                    .message(null, getString(R.string.failed_to_autenticated), false, 1F)
+                    .show {
+                        positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                    }.positiveButton {
+                        it.dismiss()
+                    }
+        }
     }
 
     override fun storeToken(token: String) {

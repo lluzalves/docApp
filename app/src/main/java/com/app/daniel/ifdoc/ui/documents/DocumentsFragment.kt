@@ -64,29 +64,29 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
             emptyHome.isVisible = false
             context?.let {
                 adapter = DocumentsAdapter(documents, it)
-            }
-            val staggeredGridLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-            AllDocumentsRecycler.layoutManager = staggeredGridLayoutManager
-            context?.let { DivisorItens(it) }?.let { AllDocumentsRecycler.addItemDecoration(it) }
-            registerForContextMenu(AllDocumentsRecycler)
-            AllDocumentsRecycler.adapter = adapter
-        }
-    }
-
-    override fun showResponse(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showLastUploads() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-
-    override fun onClick(view: View?) {
-        when (view) {
-            createDocument -> {
-                nextScreen(R.id.addDocumentFragment)
+                val staggeredGridLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+                AllDocumentsRecycler.layoutManager = staggeredGridLayoutManager
+                context?.let { DivisorItens(it) }?.let { AllDocumentsRecycler.addItemDecoration(it) }
+                registerForContextMenu(AllDocumentsRecycler)
+                AllDocumentsRecycler.adapter = adapter
             }
         }
     }
-}
+
+        override fun showResponse(message: String) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun showLastUploads() {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+
+        override fun onClick(view: View?) {
+            when (view) {
+                createDocument -> {
+                    nextScreen(R.id.addDocumentFragment)
+                }
+            }
+        }
+    }

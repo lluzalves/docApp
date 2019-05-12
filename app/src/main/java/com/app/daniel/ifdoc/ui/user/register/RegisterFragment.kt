@@ -3,20 +3,20 @@ package com.app.daniel.ifdoc.ui.user.register
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.Navigation
+import com.afollestad.materialdialogs.MaterialDialog
 import com.app.daniel.ifdoc.R
 import com.app.daniel.ifdoc.commons.base.BaseFragment
-import com.app.daniel.ifdoc.commons.input.EmailTextWacther
+import com.app.daniel.ifdoc.commons.input.FormTextWacther
 import com.app.daniel.ifdoc.commons.network.NetworkChecker
-import com.app.daniel.ifdoc.ui.NavActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_create_user.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
@@ -27,16 +27,19 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         presenter.attachView(this)
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_create_user, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createUser.setOnClickListener(this)
-        navIcon.setOnClickListener(this)
-        val textWatcher = EmailTextWacther()
+        val textWatcher = FormTextWacther()
         userEmail.addTextChangedListener(textWatcher)
-        textWatcher.input(userEmail)
+        userPassword.addTextChangedListener(textWatcher)
+        userName.addTextChangedListener(textWatcher)
+        userProntuario.addTextChangedListener(textWatcher)
+        textWatcher.input(userEmail, userPassword, userName, createUser, userProntuario)
     }
 
     override fun checkConnectionStatus(isRegistered: Boolean) {
@@ -66,9 +69,25 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
     }
 
     override fun showResponse(message: String) {
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
-        nextScreen(R.id.authFragment)
+        view?.let { it ->
+            MaterialDialog(it.context).icon(R.drawable.ic_done)
+                    .title(R.string.warning)
+                    .message(null, getString(R.string.success_creating_user), false, 1F)
+                    .show {
+                        positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                    }.positiveButton {
+                        Navigation.findNavController(view!!).popBackStack()
+                    }
+        }
+
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val logout = menu.findItem(R.id.action_logout)
+        logout.isVisible = false
+    }
+
 
     override fun onClick(view: View) {
         when (view) {
@@ -81,10 +100,17 @@ class RegisterFragment : BaseFragment(), MvpRegisterView, View.OnClickListener {
                     checkNetwork(view.context)
                 }
             }
-            navIcon -> {
-                val intent = Intent(context,NavActivity::class.java)
-                startActivity(intent)
-            }
+        }
+    }
+
+    override fun onError(message: String) {
+        context?.let {
+            MaterialDialog(it).icon(R.drawable.ic_warning_black)
+                    .title(R.string.warning)
+                    .message(null, getString(R.string.failed_to_create_user).plus(message), false, 1F)
+                    .show {
+                        positiveButton(R.string.ok, click = MaterialDialog::dismiss)
+                    }
         }
     }
 

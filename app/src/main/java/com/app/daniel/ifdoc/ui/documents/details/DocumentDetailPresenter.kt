@@ -120,7 +120,6 @@ class DocumentDetailPresenter : BasePresenter<DocumentDetailMvpView>() {
                         mvpView?.dismissRequestDialog()
                         if (databaseResponse > -1) {
                             mMvpView?.showResponse("Deletado com sucesso")
-                            mvpView?.nextScreen(R.id.documentsFragment)
                         }
                     }
 

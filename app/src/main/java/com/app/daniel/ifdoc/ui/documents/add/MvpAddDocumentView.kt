@@ -4,5 +4,5 @@ import com.app.daniel.ifdoc.commons.base.MvpView
 import com.app.daniel.ifdoc.data.entities.responses.DocumentResponseEntity
 
 interface MvpAddDocumentView : MvpView{
-   fun showSuccessMessage(response : DocumentResponseEntity)
+   fun showSuccessMessage()
 }
