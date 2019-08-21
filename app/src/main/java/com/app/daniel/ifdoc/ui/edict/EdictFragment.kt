@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_edict.*
 class EdictFragment : BaseFragment(), EdictMvpView {
     private lateinit var dialog: ProgressDialog
     private var presenter = EdictPresenter()
-    private lateinit var adapter : EdictAdapter
+    private lateinit var adapter: EdictAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -42,7 +42,9 @@ class EdictFragment : BaseFragment(), EdictMvpView {
     }
 
     override fun dismissRequestDialog() {
+        if (::dialog.isInitialized) {
             dialog.dismiss()
+        }
     }
 
     override fun showResponse(message: String) {
@@ -77,7 +79,7 @@ class EdictFragment : BaseFragment(), EdictMvpView {
                 scrollEdicts.isVisible = false
                 emptyEdicts.isVisible = true
             }
-            else ->{
+            else -> {
                 scrollEdicts.isVisible = true
                 emptyEdicts.isVisible = false
             }

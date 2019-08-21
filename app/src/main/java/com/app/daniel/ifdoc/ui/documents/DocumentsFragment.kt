@@ -68,11 +68,11 @@ class DocumentsFragment : BaseFragment(), DocumentsMvpView, View.OnClickListener
             emptyHome.isVisible = true
         } else {
             emptyHome.isVisible = false
-            context?.let {
-                adapter = DocumentsAdapter(documents, it,edict)
+            context?.let {context ->
+                adapter = DocumentsAdapter(documents, context,edict)
                 val staggeredGridLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
                 AllDocumentsRecycler.layoutManager = staggeredGridLayoutManager
-                context?.let { DivisorItens(it) }?.let { AllDocumentsRecycler.addItemDecoration(it) }
+                DivisorItens(context).let { AllDocumentsRecycler.addItemDecoration(it) }
                 registerForContextMenu(AllDocumentsRecycler)
                 AllDocumentsRecycler.adapter = adapter
             }

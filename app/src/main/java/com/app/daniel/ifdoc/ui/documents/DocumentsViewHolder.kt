@@ -19,10 +19,10 @@ class DocumentsViewHolder(view: View, val context: Context) : BaseViewHolder<Doc
     lateinit var document: Document
     lateinit var edict: Edict
     private val checker = StringChecker()
-    val card: LinearLayout by lazy { view.documentCard }
-    val documentType: TextView by lazy { view.documentType }
-    val documentData: TextView by lazy { view.documentDate }
-    val documentStatus: TextView by lazy { view.documentStatus }
+    private val card: LinearLayout by lazy { view.documentCard }
+    private val documentType: TextView by lazy { view.documentType }
+    private val documentData: TextView by lazy { view.documentDate }
+    private val documentStatus: TextView by lazy { view.documentStatus }
 
     override fun show(document: Document) {
 
